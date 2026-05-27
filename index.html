@@ -1,10 +1,248 @@
-<div class="art-card">
-    <div class="art-img">
-        <img src="ССЫЛКА_НА_ВАШЕ_ФОТО" alt="Название картины">
-    </div>
-    <div class="art-info">
-        <div class="art-title">Название</div>
-        <div class="art-price">Цена</div>
-        <a href="mailto:your@email.com?subject=Куплю ..." class="btn-buy">Купить</a>
-    </div>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Художник | Портфолио и продажа картин</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0a0a;
+            color: #eee;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        header {
+            text-align: center;
+            border-bottom: 1px solid #2a2a2a;
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+        .tagline {
+            color: #888;
+            margin-top: 0.5rem;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: white;
+        }
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            border-left: 3px solid #888;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .card {
+            background: #111;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            border-color: #555;
+        }
+        .card-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #1e1e1e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .card-info {
+            padding: 1rem;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+        .card-price {
+            color: #aaa;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+        .btn {
+            display: inline-block;
+            background: #2c2c2c;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: #4a4a4a;
+        }
+        .about {
+            background: #111;
+            padding: 1.5rem;
+            border-radius: 16px;
+            border-left: 3px solid #888;
+            margin-bottom: 3rem;
+        }
+        .contacts {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .contacts a {
+            background: #111;
+            color: #ccc;
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid #2a2a2a;
+            transition: 0.2s;
+        }
+        .contacts a:hover {
+            background: #222;
+            color: white;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.8rem;
+            color: #666;
+            border-top: 1px solid #2a2a2a;
+        }
+        @media (max-width: 640px) {
+            h1 { font-size: 1.8rem; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>ART STUDIO</h1>
+        <div class="tagline">современная живопись · единственные экземпляры</div>
+        <nav>
+            <a href="#gallery">Галерея</a>
+            <a href="#about">Обо мне</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="gallery">
+            <h2>Доступные работы</h2>
+            <div class="gallery">
+                <!-- Картина 1 -->
+                <div class="card">
+                    <div class="card-img">
+                        <img src="photo_2024-12-25_14-56-57.jpg" alt="Картина 1">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Безымянная серия №1</div>
+                        <div class="card-price">250 €</div>
+                        <a href="mailto:your@email.com?subject=Куплю картину №1" class="btn">Купить</a>
+                    </div>
+                </div>
+                <!-- Картина 2 -->
+                <div class="card">
+                    <div class="card-img">
+                        <img src="photo_2025-03-08_21-28-59.jpg" alt="Картина 2">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Отражение</div>
+                        <div class="card-price">320 €</div>
+                        <a href="mailto:your@email.com?subject=Куплю картину Отражение" class="btn">Купить</a>
+                    </div>
+                </div>
+                <!-- Картина 3 -->
+                <div class="card">
+                    <div class="card-img">
+                        <img src="photo_2025-03-08_21-29-04.jpg" alt="Картина 3">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Ночной диалог</div>
+                        <div class="card-price">180 €</div>
+                        <a href="mailto:your@email.com?subject=Куплю картину Ночной диалог" class="btn">Купить</a>
+                    </div>
+                </div>
+                <!-- Картина 4 (заглушка, можно заменить на свою) -->
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://placehold.co/600x600/222/666?text=Новая+работа" alt="Новая картина">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Скоро</div>
+                        <div class="card-price">—</div>
+                        <a href="#" class="btn">Уточнить</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2>О художнике</h2>
+            <div class="about">
+                <p>Каждая картина — это диалог с тишиной. Я работаю в смешанной технике, используя акрил, масло и фактурные пасты. Мои произведения находятся в частных коллекциях по всему миру.<br><br>Хотите приобрести работу или заказать индивидуальный портрет? Напишите мне — обсудим детали.</p>
+            </div>
+        </section>
+
+        <section id="contacts">
+            <h2>Контакты</h2>
+            <div class="contacts">
+                <a href="mailto:your@email.com">Email</a>
+                <a href="#" target="_blank">Telegram</a>
+                <a href="#" target="_blank">Instagram</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 ART STUDIO · все права защищены</p>
+    </footer>
 </div>
+</body>
+</html>
