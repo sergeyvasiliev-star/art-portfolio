@@ -5,190 +5,191 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Художник | Портфолио и продажа картин</title>
     <style>
-    @font-face {
-        font-family: 'Yuliana';
-        src: url('fonts/Yuliana.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-    }
-    @font-face {
-        font-family: 'Spaghetti Cyrillic';
-        src: url('fonts/Spaghetti Cyrillic.otf') format('opentype');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-    }
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    body {
-        background: #0a0a0a;
-        color: #7A7666;
-        font-family: 'Spaghetti Cyrillic', 'Segoe UI', Roboto, sans-serif;
-        font-size: 1.1rem;
-        line-height: 1.5;
-    }
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem 1.5rem;
-    }
-    header {
-        text-align: center;
-        border-bottom: 1px solid #2a2a2a;
-        padding-bottom: 2rem;
-        margin-bottom: 3rem;
-    }
-    h1 {
-        font-family: 'Yuliana', 'Georgia', 'Times New Roman', serif;
-        font-size: 5rem;
-        font-weight: normal;
-        letter-spacing: 4px;
-        text-transform: none;
-        color: #fff;  /* остаётся белым */
-        margin-bottom: 1rem;
-    }
-    nav {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        margin-top: 1.5rem;
-        flex-wrap: wrap;
-    }
-    nav a {
-        color: #7A7666;
-        text-decoration: none;
-        font-size: 2.8rem;
-        transition: all 0.2s ease;
-    }
-    nav a:hover {
-        color: #ffffff;
-        text-shadow: 0 0 4px rgba(255,255,255,0.5);
-    }
-    h2 {
-        color: #7A7666;
-        font-size: 2.8rem;
-        font-weight: 300;
-        border-left: 3px solid #888;
-        padding-left: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    .gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 2rem;
-        margin-bottom: 3rem;
-    }
-    .card {
-        background: transparent;
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
-        transition: none;
-    }
-    .card-img {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        background: #1e1e1e;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        border-radius: 16px;
-    }
-    .card-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .card-info {
-        padding: 1rem 0 0 0;
-    }
-    .card-title {
-        color: #7A7666;
-        font-size: 3.0rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-    }
-    .card-price {
-        color: #7A7666;
-        font-size: 2.0rem;
-        font-weight: normal;
-        margin-bottom: 0.5rem;
-        line-height: 1.2;
-    }
-    .btn {
-        display: inline-block;
-        background: #2c2c2c;
-        color: #7A7666;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 30px;
-        text-decoration: none;
-        font-size: 1.6rem;
-        cursor: pointer;
-        transition: background 0.2s;
-        margin-top: 0.5rem;
-    }
-    .btn:hover {
-        background: #4a4a4a;
-    }
-    .about {
-        background: #111;
-        padding: 1.5rem;
-        border-radius: 16px;
-        border-left: 3px solid #888;
-        margin-bottom: 3rem;
-        font-size: 2.0rem;
-        line-height: 1.4;
-        color: #7A7666;
-    }
-    .contacts {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin: 2rem 0;
-    }
-    .contacts a {
-        background: #111;
-        color: #7A7666;
-        text-decoration: none;
-        border-radius: 40px;
-        border: 1px solid #2a2a2a;
-        transition: 0.2s;
-        font-size: 2.0rem;
-        padding: 0.8rem 1.8rem;
-    }
-    .contacts a:hover {
-        background: #222;
-        color: white;
-    }
-    footer {
-        text-align: center;
-        padding: 2rem 0;
-        font-size: 1.6rem;
-        color: #7A7666;
-        border-top: 1px solid #2a2a2a;
-    }
-    footer p {
-        margin: 0.2rem 0;
-    }
-    @media (max-width: 640px) {
-        .card-title { font-size: 2.2rem; }
-        .card-price { font-size: 1.6rem; }
-        .btn { font-size: 1.4rem; }
-        nav a { font-size: 1.8rem; }
-        .about { font-size: 1.6rem; }
-        .contacts a { font-size: 1.6rem; }
-        h1 { font-size: 3rem; }
-        .container { padding: 1rem; }
-        footer { font-size: 1.2rem; }
-    }
-</style>
+        @font-face {
+            font-family: 'Yuliana';
+            src: url('fonts/Yuliana.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Spaghetti Cyrillic';
+            src: url('fonts/Spaghetti Cyrillic.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0a0a;
+            color: #7A7666;  /* зеленовато-серый */
+            font-family: 'Spaghetti Cyrillic', 'Segoe UI', Roboto, sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        header {
+            text-align: center;
+            border-bottom: 1px solid #2a2a2a;
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+        }
+        h1 {
+            font-family: 'Yuliana', 'Georgia', 'Times New Roman', serif;
+            font-size: 5rem;
+            font-weight: normal;
+            letter-spacing: 4px;
+            text-transform: none;
+            color: #fff;      /* белый заголовок */
+            margin-bottom: 1rem;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: #7A7666;
+            text-decoration: none;
+            font-size: 2.8rem;
+            transition: all 0.2s ease;
+        }
+        nav a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 4px rgba(255,255,255,0.5);
+        }
+        h2 {
+            color: #7A7666;
+            font-size: 2.8rem;
+            font-weight: 300;
+            border-left: 3px solid #888;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .card {
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            transition: none;
+        }
+        .card-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #1e1e1e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .card-info {
+            padding: 1rem 0 0 0;
+        }
+        .card-title {
+            color: #7A7666;
+            font-size: 3.0rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .card-price {
+            color: #7A7666;
+            font-size: 2.0rem;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        .btn {
+            display: inline-block;
+            background: #2c2c2c;
+            color: #7A7666;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            margin-top: 0.5rem;
+        }
+        .btn:hover {
+            background: #4a4a4a;
+            color: #ffffff;   /* белый при наведении */
+        }
+        .about {
+            background: #111;
+            padding: 1.5rem;
+            border-radius: 16px;
+            border-left: 3px solid #888;
+            margin-bottom: 3rem;
+            font-size: 2.0rem;
+            line-height: 1.4;
+            color: #7A7666;
+        }
+        .contacts {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .contacts a {
+            background: #111;
+            color: #7A7666;
+            text-decoration: none;
+            border-radius: 40px;
+            border: 1px solid #2a2a2a;
+            transition: 0.2s;
+            font-size: 2.0rem;
+            padding: 0.8rem 1.8rem;
+        }
+        .contacts a:hover {
+            background: #222;
+            color: #ffffff;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 1.6rem;
+            color: #7A7666;
+            border-top: 1px solid #2a2a2a;
+        }
+        footer p {
+            margin: 0.2rem 0;
+        }
+        @media (max-width: 640px) {
+            .card-title { font-size: 2.2rem; }
+            .card-price { font-size: 1.6rem; }
+            .btn { font-size: 1.4rem; }
+            nav a { font-size: 1.8rem; }
+            .about { font-size: 1.6rem; }
+            .contacts a { font-size: 1.6rem; }
+            h1 { font-size: 3rem; }
+            .container { padding: 1rem; }
+            footer { font-size: 1.2rem; }
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -196,8 +197,8 @@
         <h1>SERGEY VASILIEV</h1>
         <nav>
             <a href="#gallery">Галерея</a>
-            <a href="#about">Художник</a>
-            <a href="#contacts">Связь</a>
+            <a href="#about">Обо мне</a>
+            <a href="#contacts">Контакты</a>
         </nav>
     </header>
 
@@ -246,6 +247,8 @@
                         <div class="card-price">Красота бывает молчаливой. Это приглашение остановиться. Заметить момент, когда природа не говорит, а дышит.</div>
                         <a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину Ночной диалог" class="btn">Купить</a>
                     </div>
+                </div>
+                <!-- карточка "Скоро" удалена -->
             </div>
         </section>
 
