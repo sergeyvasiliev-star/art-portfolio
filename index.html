@@ -50,6 +50,13 @@
             text-transform: none;
             color: #fff;
             margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        /* Эффект свечения при наведении */
+        h1:hover {
+            color: #ffe6b3;
+            text-shadow: 0 0 8px #ffaa33, 0 0 12px #ff8800;
         }
         nav {
             display: flex;
@@ -88,7 +95,7 @@
             border-radius: 0;
             box-shadow: none;
             transition: none;
-            cursor: pointer; /* чтобы было понятно, что кликабельно */
+            cursor: pointer;
         }
         .card-img {
             width: 100%;
@@ -108,7 +115,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            pointer-events: none; /* чтобы клик проходил на родителя .card */
+            pointer-events: none;
         }
         .card-info {
             padding: 1rem 0 0 0;
@@ -184,7 +191,6 @@
         footer p {
             margin: 0.2rem 0;
         }
-
         /* Модальное окно (лайтбокс) */
         .modal {
             display: none;
@@ -215,7 +221,6 @@
             font-weight: bold;
             transition: 0.3s;
             cursor: pointer;
-            z-index: 1001;
             background: none;
             border: none;
             font-family: monospace;
@@ -223,7 +228,6 @@
         .close-btn:hover {
             color: #bbb;
         }
-
         @media (max-width: 640px) {
             .card-title { font-size: 2.2rem; }
             .card-price { font-size: 1.6rem; }
@@ -319,64 +323,47 @@
     </footer>
 </div>
 
-<!-- Модальное окно для полноэкранного просмотра картин -->
+<!-- Модальное окно -->
 <div id="imageModal" class="modal">
     <span class="close-btn">&times;</span>
     <img class="modal-content" id="modalImage">
 </div>
 
 <script>
-    // Находим все карточки с классом .card
     const cards = document.querySelectorAll('.card');
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const closeBtn = document.querySelector('.close-btn');
 
-    // Открытие модального окна при клике на карточку (область картинки, но вся карточка кликабельна)
     cards.forEach(card => {
         card.addEventListener('click', function(e) {
-            // Предотвращаем срабатывание, если клик был на кнопке "Купить" или ссылке внутри карточки
-            if (e.target.classList && e.target.classList.contains('btn')) {
-                return; // не открываем модалку, кнопка работает как обычно
-            }
-            if (e.target.tagName === 'A') {
-                return;
-            }
-            // Берём путь к картинке из атрибута data-img или из img внутри
+            if (e.target.classList && e.target.classList.contains('btn')) return;
+            if (e.target.tagName === 'A') return;
             let imgSrc = card.getAttribute('data-img');
             if (!imgSrc) {
                 const imgElement = card.querySelector('.card-img img');
-                if (imgElement) {
-                    imgSrc = imgElement.src;
-                }
+                if (imgElement) imgSrc = imgElement.src;
             }
             if (imgSrc) {
                 modal.style.display = 'flex';
                 modalImg.src = imgSrc;
-                document.body.style.overflow = 'hidden'; // запрещаем прокрутку фона
+                document.body.style.overflow = 'hidden';
             }
         });
     });
 
-    // Закрытие модального окна
     function closeModal() {
         modal.style.display = 'none';
         modalImg.src = '';
-        document.body.style.overflow = ''; // возвращаем прокрутку
+        document.body.style.overflow = '';
     }
 
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            closeModal();
-        }
+        if (e.target === modal) closeModal();
     });
-
-    // Закрытие по клавише Escape
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.style.display === 'flex') {
-            closeModal();
-        }
+        if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
     });
 </script>
 </body>
