@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Художник | Портфолио и продажа картин</title>
     <style>
+        /* ----- ПОДКЛЮЧЕНИЕ ШРИФТОВ ----- */
         @font-face {
             font-family: 'Yuliana';
             src: url('fonts/Yuliana.ttf') format('truetype');
@@ -13,14 +14,15 @@
             font-display: swap;
         }
         @font-face {
-            font-family: 'Spaghetti Cyrillic';
-            src: url('fonts/Spaghetti Cyrillic.otf') format('opentype');
+            font-family: 'Kontrabanda';
+            src: url('fonts/Kontrabanda.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
         }
 
-        /* Анимация дышащего огня для текста кнопки "Купить" */
+        /* ----- ОГНЕННЫЕ АНИМАЦИИ ----- */
+        /* Анимация для кнопок */
         @keyframes breathingFire {
             0% { color: #7A7666; text-shadow: 0 0 2px #ff6600, 0 0 4px #ff4400; }
             25% { color: #ffaa55; text-shadow: 0 0 6px #ff8800, 0 0 10px #ff5500; }
@@ -29,7 +31,7 @@
             100% { color: #7A7666; text-shadow: 0 0 2px #ff6600, 0 0 4px #ff4400; }
         }
 
-        /* Анимация огня для заголовка (многослойное свечение) */
+        /* Анимация для заголовка */
         @keyframes fireGlow {
             0% {
                 text-shadow: 0 0 20px #fefcc9,
@@ -51,6 +53,7 @@
             }
         }
 
+        /* ----- ОСНОВНЫЕ СТИЛИ ----- */
         * {
             margin: 0;
             padding: 0;
@@ -59,7 +62,7 @@
         body {
             background: #0a0a0a;
             color: #7A7666;
-            font-family: 'Spaghetti Cyrillic', 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Kontrabanda', 'Spaghetti Cyrillic', 'Segoe UI', Roboto, sans-serif;
             font-size: 1.1rem;
             line-height: 1.5;
         }
@@ -296,7 +299,7 @@
         <section id="gallery">
             <h2>Доступные работы</h2>
             <div class="gallery">
-                <!-- КАРТИНЫ (те же, что в последней стабильной версии) -->
+                <!-- Картины (список остается без изменений) -->
                 <!-- 1. Летящий демон Врубеля -->
                 <div class="card" data-img="photo_2024-12-25_14-56-57.jpg">
                     <div class="card-img">
