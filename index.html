@@ -82,7 +82,8 @@
     text-transform: none;
     margin-bottom: 1rem;
     cursor: pointer;
-    background: linear-gradient(135deg, #8B0000, #cc3333, #ff4d4d, #8B0000);
+    /* Очень тёмный красный градиент для металлического блеска */
+    background: linear-gradient(135deg, #1a0000, #3a0404, #5c0a0a, #1a0000);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -93,6 +94,28 @@
 @keyframes shine {
     0% { background-position: 0% 50%; }
     100% { background-position: 200% 50%; }
+}
+
+/* Анимация огненных теней (как раньше, можно оставить ту же) */
+@keyframes fireGlow {
+    0% {
+        text-shadow: 0 0 20px #fefcc9,
+                     10px -10px 30px #feec85,
+                     -20px -20px 40px #ffae34,
+                     20px -40px 50px #ec760c,
+                     -20px -60px 60px #cd4606,
+                     0 -80px 70px #973716,
+                     10px -90px 80px #451b0e;
+    }
+    100% {
+        text-shadow: 0 0 20px #fefcc9,
+                     10px -10px 30px #fefcc9,
+                     -20px -20px 40px #feec85,
+                     22px -42px 60px #ffae34,
+                     -22px -58px 50px #ec760c,
+                     0 -82px 80px #cd4606,
+                     10px -90px 80px #973716;
+    }
         }
         nav {
             display: flex;
