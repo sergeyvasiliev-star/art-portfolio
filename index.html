@@ -80,10 +80,19 @@
     font-weight: normal;
     letter-spacing: 4px;
     text-transform: none;
-    color: #8B0000;          /* тёмно-красный */
     margin-bottom: 1rem;
     cursor: pointer;
-    animation: fireGlow 1s ease-in-out infinite alternate;
+    background: linear-gradient(135deg, #8B0000, #cc3333, #ff4d4d, #8B0000);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 3s linear infinite, fireGlow 1s ease-in-out infinite alternate;
+}
+
+@keyframes shine {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
         }
         nav {
             display: flex;
