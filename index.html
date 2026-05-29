@@ -20,7 +20,7 @@
             font-display: swap;
         }
 
-        /* Анимация дышащего огня для текста кнопки "Купить" (оставляем) */
+        /* Анимация дышащего огня для текста кнопки "Купить" */
         @keyframes breathingFire {
             0% { color: #7A7666; text-shadow: 0 0 2px #ff6600, 0 0 4px #ff4400; }
             25% { color: #ffaa55; text-shadow: 0 0 6px #ff8800, 0 0 10px #ff5500; }
@@ -29,7 +29,7 @@
             100% { color: #7A7666; text-shadow: 0 0 2px #ff6600, 0 0 4px #ff4400; }
         }
 
-        /* Анимация огня для заголовка (многослойное свечение, как в примере) */
+        /* Анимация огня для заголовка (многослойное свечение) */
         @keyframes fireGlow {
             0% {
                 text-shadow: 0 0 20px #fefcc9,
@@ -80,13 +80,11 @@
             font-weight: normal;
             letter-spacing: 4px;
             text-transform: none;
-            color: #fff;
+            color: #7A7666;                    /* изменено: теперь как у других */
             margin-bottom: 1rem;
             cursor: pointer;
             animation: fireGlow 1s ease-in-out infinite alternate;
         }
-        /* Убираем старый hover, чтобы не мешал */
-        /* h1:hover { ... } удалён */
         nav {
             display: flex;
             justify-content: center;
@@ -209,7 +207,6 @@
             flex-wrap: wrap;
             margin: 2rem 0;
         }
-        /* Обычная кнопка Email (без огня) */
         .contacts a {
             background: #111;
             color: #7A7666;
