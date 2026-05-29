@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Художник | Портфолио и продажа картин</title>
     <style>
+        /* ===== ВАШИ ОСНОВНЫЕ СТИЛИ (без изменений) ===== */
         @font-face {
             font-family: 'Yuliana';
             src: url('fonts/Yuliana.ttf') format('truetype');
@@ -20,28 +21,13 @@
             font-display: swap;
         }
 
-        /* Анимация дышащего огня для текста кнопки */
+        /* Анимация дышащего огня для текста кнопки "Купить" */
         @keyframes breathingFire {
-            0% {
-                color: #7A7666;
-                text-shadow: 0 0 2px #ff6600, 0 0 4px #ff4400;
-            }
-            25% {
-                color: #ffaa55;
-                text-shadow: 0 0 6px #ff8800, 0 0 10px #ff5500;
-            }
-            50% {
-                color: #ffcc77;
-                text-shadow: 0 0 10px #ffaa33, 0 0 15px #ff7700;
-            }
-            75% {
-                color: #ffaa55;
-                text-shadow: 0 0 6px #ff8800, 0 0 10px #ff5500;
-            }
-            100% {
-                color: #7A7666;
-                text-shadow: 0 0 2px #ff6600, 0 0 4px #ff4400;
-            }
+            0% { color: #7A7666; text-shadow: 0 0 2px #ff6600, 0 0 4px #ff4400; }
+            25% { color: #ffaa55; text-shadow: 0 0 6px #ff8800, 0 0 10px #ff5500; }
+            50% { color: #ffcc77; text-shadow: 0 0 10px #ffaa33, 0 0 15px #ff7700; }
+            75% { color: #ffaa55; text-shadow: 0 0 6px #ff8800, 0 0 10px #ff5500; }
+            100% { color: #7A7666; text-shadow: 0 0 2px #ff6600, 0 0 4px #ff4400; }
         }
 
         * {
@@ -161,8 +147,6 @@
             color: #a0a0a0;
             text-decoration: line-through;
         }
-
-        /* Стили для кнопок с огненной анимацией текста */
         .btn {
             display: inline-block;
             background: #2c2c2c;
@@ -176,13 +160,11 @@
             margin-top: 0.5rem;
             animation: breathingFire 1.5s ease-in-out infinite;
         }
-
         .btn:hover {
             color: #ffffff !important;
             text-shadow: 0 0 12px #ffaa33, 0 0 20px #ff6600 !important;
             background: #4a2a0a;
         }
-
         .btn-disabled {
             background: #1a1a1a;
             color: #555;
@@ -191,7 +173,6 @@
             animation: none;
             text-shadow: none;
         }
-
         .about {
             background: #111;
             padding: 1.5rem;
@@ -209,7 +190,10 @@
             flex-wrap: wrap;
             margin: 2rem 0;
         }
-        .contacts a {
+        /* Стили для кнопки Email с огнём */
+        .fire-email {
+            position: relative;
+            display: inline-block;
             background: #111;
             color: #7A7666;
             text-decoration: none;
@@ -218,10 +202,57 @@
             transition: 0.2s;
             font-size: 2.0rem;
             padding: 0.8rem 1.8rem;
+            overflow: hidden;
+            z-index: 1;
         }
-        .contacts a:hover {
+        .fire-email:hover {
             background: #222;
             color: #ffffff;
+        }
+        .email-text {
+            position: relative;
+            z-index: 2;
+        }
+        .fire-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+            border-radius: 40px;
+        }
+        .fire-base {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 180px;
+            background: #ff9900;
+            filter: blur(15px) contrast(20);
+            border-radius: 40%;
+        }
+        .burn-particle {
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 8px;
+            background: black;
+            border-radius: 50%;
+            animation: burnUp 1.5s infinite linear;
+        }
+        @keyframes burnUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-150px) scale(0);
+                opacity: 0;
+            }
         }
         footer {
             text-align: center;
@@ -298,7 +329,7 @@
         <section id="gallery">
             <h2>Доступные работы</h2>
             <div class="gallery">
-                <!-- ===== КАРТИНЫ В ПРОДАЖЕ (доступны) ===== -->
+                <!-- КАРТИНЫ (без изменений, оставлены как в вашем последнем коде) -->
                 <!-- 1. Летящий демон Врубеля -->
                 <div class="card" data-img="photo_2024-12-25_14-56-57.jpg">
                     <div class="card-img">
@@ -344,7 +375,7 @@
                     </div>
                 </div>
 
-                <!-- 4. Нежность (В ПРОДАЖЕ) -->
+                <!-- 4. Нежность -->
                 <div class="card" data-img="IMG_20260528_185752.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185752.webp" alt="Нежность">
@@ -359,7 +390,7 @@
                     </div>
                 </div>
 
-                <!-- 5. Макхамба (В ПРОДАЖЕ) -->
+                <!-- 5. Макхамба -->
                 <div class="card" data-img="IMG_20260528_185753.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185753.webp" alt="Макхамба">
@@ -374,8 +405,7 @@
                     </div>
                 </div>
 
-                <!-- ===== ПРОДАННЫЕ КАРТИНЫ ===== -->
-                <!-- 6. Жан-Мишель -->
+                <!-- 6. Жан-Мишель (продана) -->
                 <div class="card" data-img="IMG_20260528_185740.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185740.webp" alt="Жан-Мишель">
@@ -390,7 +420,7 @@
                     </div>
                 </div>
 
-                <!-- 7. Взгляд -->
+                <!-- 7. Взгляд (продана) -->
                 <div class="card" data-img="IMG_20260528_185755.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185755.webp" alt="Взгляд">
@@ -405,7 +435,7 @@
                     </div>
                 </div>
 
-                <!-- 8. Ты и я -->
+                <!-- 8. Ты и я (продана) -->
                 <div class="card" data-img="IMG_20260528_185757.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185757.webp" alt="Ты и я">
@@ -420,7 +450,7 @@
                     </div>
                 </div>
 
-                <!-- 9. Пляж -->
+                <!-- 9. Пляж (продана) -->
                 <div class="card" data-img="IMG_20260528_185759.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185759.webp" alt="Пляж">
@@ -435,7 +465,7 @@
                     </div>
                 </div>
 
-                <!-- 10. Единство -->
+                <!-- 10. Единство (продана) -->
                 <div class="card" data-img="IMG_20260528_185801.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185801.webp" alt="Единство">
@@ -462,7 +492,14 @@
         <section id="contacts">
             <h2>Контакты</h2>
             <div class="contacts">
-                <a href="mailto:Vasilev_SV@inbox.ru">Email</a>
+                <!-- Кнопка Email с огнём (новая версия) -->
+                <a href="mailto:Vasilev_SV@inbox.ru" class="fire-email" id="fireEmailBtn">
+                    <span class="email-text">Email</span>
+                    <div class="fire-container">
+                        <div class="fire-base"></div>
+                        <!-- частицы .burn-particle будут добавлены скриптом -->
+                    </div>
+                </a>
             </div>
         </section>
     </main>
@@ -479,6 +516,7 @@
 </div>
 
 <script>
+    // ===== МОДАЛЬНОЕ ОКНО (без изменений) =====
     const cards = document.querySelectorAll('.card');
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
@@ -514,6 +552,29 @@
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
     });
+
+    // ===== ГЕНЕРАЦИЯ ИСКР ОГНЯ ДЛЯ КНОПКИ EMAIL =====
+    const fireContainer = document.querySelector('.fire-container');
+    if (fireContainer) {
+        const particleCount = 30;  // количество искр
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('burn-particle');
+            // Случайные параметры
+            const size = Math.floor(Math.random() * 10 + 4); // ширина от 4px до 14px
+            const leftOffset = Math.random() * 140 - 70; // от -70px до +70px от центра
+            const duration = Math.random() * 1.5 + 1; // от 1s до 2.5s
+            const delay = Math.random() * 2; // задержка от 0 до 2s
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = `calc(50% + ${leftOffset}px)`;
+            particle.style.animationDuration = duration + 's';
+            particle.style.animationDelay = delay + 's';
+            // Небольшой разброс по вертикали (чтобы не все стартовали снизу)
+            particle.style.bottom = Math.random() * 50 + 'px';
+            fireContainer.appendChild(particle);
+        }
+    }
 </script>
 </body>
 </html>
