@@ -65,7 +65,7 @@
             line-height: 1.5;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
         }
@@ -109,25 +109,28 @@
             font-weight: 300;
             border-left: 3px solid #888;
             padding-left: 1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
+
+        /* НОВАЯ ГАЛЕРЕЯ: вертикальный список, одна картина во всю ширину */
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
             margin-bottom: 3rem;
         }
+
         .card {
+            display: flex;
+            flex-direction: column;
             background: transparent;
-            border: none;
-            border-radius: 0;
-            box-shadow: none;
-            transition: none;
             cursor: pointer;
+            width: 100%;
         }
+
+        /* Изображение на всю ширину */
         .card-img {
             width: 100%;
-            aspect-ratio: 1 / 1;
             background: #1e1e1e;
             display: flex;
             align-items: center;
@@ -137,17 +140,25 @@
             transition: transform 0.2s ease;
         }
         .card-img:hover {
-            transform: scale(1.02);
+            transform: scale(1.01);
         }
         .card-img img {
             width: 100%;
-            height: 100%;
+            height: auto;
             object-fit: cover;
+            display: block;
             pointer-events: none;
         }
+
+        /* Блок с описанием под картинкой */
         .card-info {
-            padding: 1rem 0 0 0;
+            padding: 1.5rem 0 0 0;
+            text-align: left;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
         }
+
         .card-title {
             color: #7A7666;
             font-size: 2.5rem;
@@ -191,6 +202,7 @@
             animation: none;
             text-shadow: none;
         }
+
         .about {
             background: #111;
             padding: 1.5rem;
@@ -232,6 +244,8 @@
         footer p {
             margin: 0.2rem 0;
         }
+
+        /* Модальное окно */
         .modal {
             display: none;
             position: fixed;
@@ -268,7 +282,11 @@
         .close-btn:hover {
             color: #bbb;
         }
-        @media (max-width: 640px) {
+
+        @media (max-width: 768px) {
+            .card-info {
+                padding: 1rem 0 0 0;
+            }
             .card-title { font-size: 2rem; }
             .card-price { font-size: 1.4rem; }
             .btn { font-size: 1.2rem; }
@@ -297,7 +315,7 @@
         <section id="gallery">
             <h2>Доступные работы</h2>
             <div class="gallery">
-                <!-- Картина 1 -->
+                <!-- 1. Летящий демон Врубеля -->
                 <div class="card" data-img="photo_2024-12-25_14-56-57.jpg">
                     <div class="card-img">
                         <img src="photo_2024-12-25_14-56-57.jpg" alt="Летящий демон Врубеля">
@@ -307,12 +325,12 @@
                         <div class="card-price">Холст 150 х 110 / масло</div>
                         <div class="card-price">2024 год</div>
                         <div class="card-title">100 000 руб</div>
-                        <div class="card-price">Взгляд устремлён вперёд, но не видит цели. Вокруг — холодное, безжизненное пространство...</div>
+                        <div class="card-price">Взгляд устремлён вперёд, но не видит цели. Вокруг — холодное, безжизненное пространство, которое написано кристаллическими, острыми мазками.</div>
                         <a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину Летящий демон Врубеля" class="btn">Купить</a>
                     </div>
                 </div>
 
-                <!-- Картина 2 -->
+                <!-- 2. Самурай -->
                 <div class="card" data-img="IMG_20260528_202323.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_202323.webp" alt="Самурай">
@@ -322,12 +340,12 @@
                         <div class="card-price">Холст 150 х 110 / масло</div>
                         <div class="card-price">2024 год</div>
                         <div class="card-title">100 000 руб</div>
-                        <div class="card-price">Перед вами — не просто воин. Это дух, пойманный в момент высшего напряжения...</div>
+                        <div class="card-price">Перед вами — не просто воин. Это дух, пойманный в момент высшего напряжения, в точке перерождения. Главный герой здесь — не сталь клинка, а сама стихия.</div>
                         <a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину Самурай" class="btn">Купить</a>
                     </div>
                 </div>
 
-                <!-- Картина 3 -->
+                <!-- 3. Однажды в Карелии -->
                 <div class="card" data-img="photo_2025-03-08_21-29-04.jpg">
                     <div class="card-img">
                         <img src="photo_2025-03-08_21-29-04.jpg" alt="Однажды в Карелии">
@@ -337,12 +355,12 @@
                         <div class="card-price">Холст 150 х 120 / масло</div>
                         <div class="card-price">2025 год</div>
                         <div class="card-title">100 000 руб</div>
-                        <div class="card-price">Красота бывает молчаливой. Приглашение остановиться и заметить момент...</div>
+                        <div class="card-price">Красота бывает молчаливой. Это приглашение остановиться. Заметить момент, когда природа не говорит, а дышит.</div>
                         <a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину Однажды в Карелии" class="btn">Купить</a>
                     </div>
                 </div>
 
-                <!-- Картина 4: Нежность -->
+                <!-- 4. Нежность (в продаже, 10 000) -->
                 <div class="card" data-img="IMG_20260528_185752.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185752.webp" alt="Нежность">
@@ -357,7 +375,7 @@
                     </div>
                 </div>
 
-                <!-- Картина 5: Макхамба -->
+                <!-- 5. Макхамба (в продаже, 10 000) -->
                 <div class="card" data-img="IMG_20260528_185753.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185753.webp" alt="Макхамба">
@@ -372,7 +390,7 @@
                     </div>
                 </div>
 
-                <!-- Картина 6: Жан-Мишель (продана) -->
+                <!-- 6. Жан-Мишель (продана) -->
                 <div class="card" data-img="IMG_20260528_185740.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185740.webp" alt="Жан-Мишель">
@@ -387,7 +405,7 @@
                     </div>
                 </div>
 
-                <!-- Картина 7: Взгляд (продана) -->
+                <!-- 7. Взгляд (продана) -->
                 <div class="card" data-img="IMG_20260528_185755.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185755.webp" alt="Взгляд">
@@ -402,7 +420,7 @@
                     </div>
                 </div>
 
-                <!-- Картина 8: Ты и я (продана) -->
+                <!-- 8. Ты и я (продана) -->
                 <div class="card" data-img="IMG_20260528_185757.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185757.webp" alt="Ты и я">
@@ -417,7 +435,7 @@
                     </div>
                 </div>
 
-                <!-- Картина 9: Пляж (продана) -->
+                <!-- 9. Пляж (продана) -->
                 <div class="card" data-img="IMG_20260528_185759.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185759.webp" alt="Пляж">
@@ -432,7 +450,7 @@
                     </div>
                 </div>
 
-                <!-- Картина 10: Единство (продана) -->
+                <!-- 10. Единство (продана) -->
                 <div class="card" data-img="IMG_20260528_185801.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185801.webp" alt="Единство">
