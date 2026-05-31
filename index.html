@@ -44,65 +44,6 @@
                 text-shadow: 0 0 20px #fefcc9,
                              10px -10px 30px #fefcc9,
                              -20px -20px 40px #feec85,
-                             22px -42
-наоборот
-Понял — нужно наоборот: чтобы изображение было слева, а описание справа (чередование через один можно не делать, просто у всех картин одинаково: картинка слева, текст справа).
-
-Ниже представлен полный код сайта с такой вёрсткой:
-
-На десктопе: слева изображение, справа текст.
-
-На планшетах и телефонах: картинка сверху, текст снизу (адаптивность).
-
-Все стили, анимации, шрифты и модальное окно сохранены.
-
-html
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Художник | Портфолио и продажа картин</title>
-    <style>
-        /* ----- ПОДКЛЮЧЕНИЕ ШРИФТОВ ----- */
-        @font-face {
-            font-family: 'Yuliana';
-            src: url('fonts/Yuliana.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'EastSeaDoc';
-            src: url('fonts/eastseadokdocyrillic.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        /* ----- ОГНЕННЫЕ АНИМАЦИИ ----- */
-        @keyframes breathingFire {
-            0% { color: #7A7666; text-shadow: 0 0 2px #ff6600, 0 0 4px #ff4400; }
-            25% { color: #ffaa55; text-shadow: 0 0 6px #ff8800, 0 0 10px #ff5500; }
-            50% { color: #ffcc77; text-shadow: 0 0 10px #ffaa33, 0 0 15px #ff7700; }
-            75% { color: #ffaa55; text-shadow: 0 0 6px #ff8800, 0 0 10px #ff5500; }
-            100% { color: #7A7666; text-shadow: 0 0 2px #ff6600, 0 0 4px #ff4400; }
-        }
-
-        @keyframes fireGlow {
-            0% {
-                text-shadow: 0 0 20px #fefcc9,
-                             10px -10px 30px #feec85,
-                             -20px -20px 40px #ffae34,
-                             20px -40px 50px #ec760c,
-                             -20px -60px 60px #cd4606,
-                             0 -80px 70px #973716,
-                             10px -90px 80px #451b0e;
-            }
-            100% {
-                text-shadow: 0 0 20px #fefcc9,
-                             10px -10px 30px #fefcc9,
-                             -20px -20px 40px #feec85,
                              22px -42px 60px #ffae34,
                              -22px -58px 50px #ec760c,
                              0 -82px 80px #cd4606,
@@ -171,7 +112,7 @@ html
             margin-bottom: 2rem;
         }
 
-        /* ГАЛЕРЕЯ: каждая картина — flex-строка (картинка слева, текст справа) */
+        /* ГАЛЕРЕЯ: картинка слева, текст справа */
         .gallery {
             display: flex;
             flex-direction: column;
@@ -189,7 +130,6 @@ html
             align-items: flex-start;
         }
 
-        /* Изображение — 50% ширины, подстраивается по высоте */
         .card-img {
             flex: 1;
             background: #1e1e1e;
@@ -211,7 +151,6 @@ html
             pointer-events: none;
         }
 
-        /* Описание — 50% ширины */
         .card-info {
             flex: 1;
             padding: 0;
@@ -342,17 +281,11 @@ html
             color: #bbb;
         }
 
-        /* Адаптивность: на планшетах и телефонах колонки превращаются в строки */
+        /* Адаптивность */
         @media (max-width: 900px) {
             .card {
                 flex-direction: column;
                 gap: 1.5rem;
-            }
-            .card-img {
-                width: 100%;
-            }
-            .card-info {
-                width: 100%;
             }
         }
 
