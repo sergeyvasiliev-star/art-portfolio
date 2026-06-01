@@ -21,28 +21,6 @@
             font-display: swap;
         }
 
-        /* ----- ОГНЕННАЯ АНИМАЦИЯ ДЛЯ ЗАГОЛОВКА ----- */
-        @keyframes fireGlow {
-            0% {
-                text-shadow: 0 0 20px #fefcc9,
-                             10px -10px 30px #feec85,
-                             -20px -20px 40px #ffae34,
-                             20px -40px 50px #ec760c,
-                             -20px -60px 60px #cd4606,
-                             0 -80px 70px #973716,
-                             10px -90px 80px #451b0e;
-            }
-            100% {
-                text-shadow: 0 0 20px #fefcc9,
-                             10px -10px 30px #fefcc9,
-                             -20px -20px 40px #feec85,
-                             22px -42px 60px #ffae34,
-                             -22px -58px 50px #ec760c,
-                             0 -82px 80px #cd4606,
-                             10px -90px 80px #973716;
-            }
-        }
-
         /* ----- ОСНОВНЫЕ СТИЛИ (СВЕТЛАЯ СМЯГЧЁННАЯ ВЕРСИЯ) ----- */
         * {
             margin: 0;
@@ -73,10 +51,10 @@
             font-weight: normal;
             letter-spacing: 4px;
             text-transform: none;
-            color: #8B0000;
+            color: #000000;                  /* чёрный цвет */
+            text-shadow: 1px 1px 0 #000000; /* лёгкое утолщение */
             margin-bottom: 1rem;
             cursor: pointer;
-            animation: fireGlow 1s ease-in-out infinite alternate;
         }
         nav {
             display: flex;
@@ -226,6 +204,34 @@
         footer p {
             margin: 0.2rem 0;
         }
+
+        /* Кнопка "Наверх" */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #2c2c2c;
+            color: #ffffff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .scroll-top:hover {
+            background: #1a1a1a;
+            transform: translateY(-3px);
+        }
+
+        /* Модальное окно */
         .modal {
             display: none;
             position: fixed;
@@ -262,6 +268,8 @@
         .close-btn:hover {
             color: #ccc;
         }
+
+        /* Адаптивность */
         @media (max-width: 900px) {
             .card {
                 flex-direction: column;
@@ -281,6 +289,13 @@
             h1 { font-size: 3rem; }
             .container { padding: 1rem; }
             footer { font-size: 1.2rem; }
+            .scroll-top {
+                width: 40px;
+                height: 40px;
+                font-size: 22px;
+                bottom: 20px;
+                right: 20px;
+            }
         }
     </style>
 </head>
@@ -466,12 +481,28 @@
     </footer>
 </div>
 
+<!-- Кнопка "Наверх" (стрелка) -->
+<div class="scroll-top" id="scrollTopBtn" aria-label="Наверх">↑</div>
+
+<!-- Модальное окно -->
 <div id="imageModal" class="modal">
     <span class="close-btn">&times;</span>
     <img class="modal-content" id="modalImage">
 </div>
 
 <script>
+    // Плавная прокрутка наверх
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    if (scrollBtn) {
+        scrollBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Модальное окно
     const cards = document.querySelectorAll('.card');
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
