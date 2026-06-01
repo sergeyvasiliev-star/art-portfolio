@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Художник | Портфолио</title>
     <style>
-        /* ----- ПОДКЛЮЧЕНИЕ ШРИФТОВ ----- */
         @font-face {
             font-family: 'Yuliana';
             src: url('fonts/Yuliana.ttf') format('truetype');
@@ -20,8 +19,6 @@
             font-style: normal;
             font-display: swap;
         }
-
-        /* ----- ОСНОВНЫЕ СТИЛИ ----- */
         * {
             margin: 0;
             padding: 0;
@@ -54,7 +51,6 @@
             color: #000000;
             text-shadow: 1px 1px 0 #000000;
             margin-bottom: 1rem;
-            cursor: pointer;
         }
         nav {
             display: flex;
@@ -67,7 +63,7 @@
             color: #6a6a6a;
             text-decoration: none;
             font-size: 2rem;
-            transition: all 0.2s ease;
+            transition: 0.2s;
         }
         nav a:hover {
             color: #1f1f1f;
@@ -80,79 +76,59 @@
             padding-left: 1rem;
             margin-bottom: 2rem;
             margin-top: 3rem;
+            clear: both;
         }
         h2:first-of-type {
             margin-top: 0;
         }
 
-        /* СТОПКА КАРТИН */
-        .stack {
+        /* Хаотичная галерея */
+        .chaotic-gallery {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px 20px;
             margin-bottom: 4rem;
-        }
-        .stack-card {
-            width: 90%;
-            max-width: 800px;
-            margin-top: -60px; /* отрицательный отступ для создания стопки */
-            transition: transform 0.2s, box-shadow 0.2s, z-index 0s;
-            cursor: pointer;
             position: relative;
-            z-index: 1;
-            border-radius: 20px;
+        }
+        .chaotic-card {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            flex-shrink: 0;
+            border-radius: 16px;
             overflow: hidden;
-            background: #ffffff;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .stack-card:first-child {
-            margin-top: 0;
+        .chaotic-card:hover {
+            transform: scale(1.02) rotate(0deg) !important;
+            z-index: 20;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.2);
         }
-        .stack-card:hover {
-            transform: scale(1.02);
-            z-index: 10;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
-        }
-        .stack-card-img {
+        .chaotic-card img {
             width: 100%;
             height: auto;
             display: block;
             pointer-events: none;
         }
-        .stack-card-title {
+        /* Подпись – только текст, без фона */
+        .chaotic-card .title {
             position: absolute;
-            bottom: 15px;
-            left: 20px;
-            background: rgba(0,0,0,0.6);
+            bottom: 12px;
+            left: 16px;
             color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 30px;
             font-size: 1.2rem;
-            font-family: 'EastSeaDoc', sans-serif;
-            backdrop-filter: blur(4px);
+            font-weight: 500;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+            letter-spacing: 0.5px;
             pointer-events: none;
         }
-        /* для мобильных устройств чуть меньше отрицательный отступ */
-        @media (max-width: 768px) {
-            .stack-card {
-                margin-top: -40px;
-                width: 95%;
-            }
-            .stack-card-title {
-                font-size: 1rem;
-                bottom: 10px;
-                left: 12px;
-            }
-            nav a {
-                font-size: 1.5rem;
-            }
-            h1 {
-                font-size: 3rem;
-            }
-        }
 
-        /* Блок контактов */
+        /* Контакты */
         .contacts {
             display: flex;
             gap: 2rem;
@@ -175,17 +151,15 @@
             text-align: center;
             padding: 2rem 0;
             font-size: 1.2rem;
-            color: #888888;
+            color: #888;
             border-top: 1px solid #e0e0e0;
         }
-
-        /* Кнопка "Наверх" */
         .scroll-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
             background: #2c2c2c;
-            color: #ffffff;
+            color: #fff;
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -193,19 +167,17 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
+            transition: 0.2s;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 100;
             font-size: 28px;
-            font-weight: bold;
-            text-decoration: none;
         }
         .scroll-top:hover {
             background: #1a1a1a;
             transform: translateY(-3px);
         }
 
-        /* МОДАЛЬНОЕ ОКНО (полноэкранное) */
+        /* Модальное окно */
         .modal {
             display: none;
             position: fixed;
@@ -214,11 +186,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            cursor: pointer;
+            background: rgba(0,0,0,0.9);
             align-items: center;
             justify-content: center;
             overflow-y: auto;
+            cursor: pointer;
         }
         .modal-content {
             max-width: 90%;
@@ -230,9 +202,8 @@
             flex-direction: column;
             align-items: center;
             gap: 1.5rem;
-            position: relative;
-            margin: 2rem auto;
             cursor: default;
+            margin: 2rem auto;
         }
         .modal-img {
             max-width: 100%;
@@ -268,9 +239,6 @@
             margin-top: 1rem;
             color: #2c2c2c;
         }
-        .modal-btn:hover {
-            background: #d4d4d4;
-        }
         .modal-btn-disabled {
             background: #f0f0f0;
             color: #999;
@@ -280,31 +248,23 @@
             position: absolute;
             top: 20px;
             right: 30px;
-            color: #888;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
             background: none;
             border: none;
+            font-size: 40px;
+            cursor: pointer;
+            color: #888;
         }
         .close-modal:hover {
             color: #000;
         }
         @media (max-width: 768px) {
-            .modal-content {
-                padding: 1rem;
-            }
-            .modal-description h3 {
-                font-size: 1.5rem;
-            }
-            .modal-description p {
-                font-size: 1rem;
-            }
-            .close-modal {
-                top: 10px;
-                right: 15px;
-                font-size: 30px;
-            }
+            .chaotic-card .title { font-size: 0.9rem; bottom: 6px; left: 8px; }
+            .contacts a { font-size: 1.3rem; }
+            h1 { font-size: 3rem; }
+            nav a { font-size: 1.5rem; }
+            .modal-description h3 { font-size: 1.5rem; }
+            .modal-description p { font-size: 1rem; }
+            .scroll-top { width: 40px; height: 40px; font-size: 22px; bottom: 20px; right: 20px; }
         }
     </style>
 </head>
@@ -321,20 +281,14 @@
     </header>
 
     <main>
-        <!-- БЛОК "В ПРОДАЖЕ" -->
         <section id="for-sale">
             <h2>В продаже</h2>
-            <div class="stack" id="forSaleStack">
-                <!-- картины будут вставлены через JS, но для надежности напишем HTML вручную -->
-            </div>
+            <div id="forSaleGallery" class="chaotic-gallery"></div>
         </section>
-
-        <!-- БЛОК "ПРОДАННЫЕ" -->
         <section id="sold">
             <h2>Проданные</h2>
-            <div class="stack" id="soldStack"></div>
+            <div id="soldGallery" class="chaotic-gallery"></div>
         </section>
-
         <section id="contacts">
             <h2>Контакты</h2>
             <div class="contacts">
@@ -343,16 +297,12 @@
             </div>
         </section>
     </main>
-
     <footer>
-        <p>2025</p>
-        <p> · все права защищены · </p>
+        <p>2025 · все права защищены</p>
     </footer>
 </div>
 
-<div class="scroll-top" id="scrollTopBtn" aria-label="Наверх">↑</div>
-
-<!-- Модальное окно -->
+<div class="scroll-top" id="scrollTopBtn">↑</div>
 <div id="modal" class="modal">
     <div class="modal-content">
         <button class="close-modal">&times;</button>
@@ -362,68 +312,75 @@
 </div>
 
 <script>
-    // Данные картин (порядок: сначала доступные, потом проданные)
+    // Данные картин
     const paintings = [
-        { name: "Летящий демон Врубеля", img: "photo_2024-12-25_14-56-57.jpg", year: "2024", size: "Холст 150 х 110 / масло", desc: "Взгляд устремлён вперёд, но не видит цели. Вокруг — холодное, безжизненное пространство, которое написано кристаллическими, острыми мазками.", sold: false, price: null },
-        { name: "Самурай", img: "IMG_20260528_202323.webp", year: "2024", size: "Холст 150 х 110 / масло", desc: "Перед вами — не просто воин. Это дух, пойманный в момент высшего напряжения, в точке перерождения. Главный герой здесь — не сталь клинка, а сама стихия.", sold: false, price: null },
-        { name: "Однажды в Карелии", img: "photo_2025-03-08_21-29-04.jpg", year: "2025", size: "Холст 150 х 120 / масло", desc: "Красота бывает молчаливой. Это приглашение остановиться. Заметить момент, когда природа не говорит, а дышит.", sold: false, price: null },
-        { name: "Нежность", img: "IMG_20260528_185752.webp", year: "2021", size: "Холст 40 х 30 / масло", desc: "Нежность — это не слабость, а внутренняя целостность и достоинство, не нуждающееся в демонстрации.", sold: false, price: null },
-        { name: "Макхамба", img: "IMG_20260528_185753.webp", year: "2021", size: "Холст 60 х 50 / масло", desc: "Образ внутренней свободы, застывшей в моменте тишины.", sold: false, price: null },
-        { name: "Жан-Мишель", img: "IMG_20260528_185740.webp", year: "2023", size: "Холст 90 х 90 / масло", desc: "Стилизованный портрет, вдохновленный эстетикой Баския. Корона — знак внутренней силы и бунтарства.", sold: true, price: null },
-        { name: "Взгляд", img: "IMG_20260528_185755.webp", year: "2022", size: "Холст 70 х 50 / масло / копия", desc: "Геометрия и цвет сливаются в единый образ. Это портрет, где эмоции выражены не словами, а спектром оттенков.", sold: true, price: null },
-        { name: "Ты и я", img: "IMG_20260528_185757.webp", year: "2022", size: "Холст 80 х 60 / масло / копия", desc: "Они стоят рядом, но каждый хранит свою тайну. Это история о том, что за привычным обликом всегда скрывается целый калейдоскоп эмоций.", sold: true, price: null },
-        { name: "Пляж", img: "IMG_20260528_185759.webp", year: "2020", size: "Холст 30 х 20 / масло", desc: "Это мгновение, застывшее в красках. Шум прибоя и жар солнца, сплетенные в единую симфонию.", sold: true, price: null },
-        { name: "Единство", img: "IMG_20260528_185801.webp", year: "2021", size: "Холст 80 х 60 / масло", desc: "В каждом изгибе головного убора — отголосок древних песен, в каждом взгляде — мудрость веков.", sold: true, price: null }
+        { name: "Летящий демон Врубеля", img: "photo_2024-12-25_14-56-57.jpg", year: "2024", size: "Холст 150 х 110 / масло", desc: "Взгляд устремлён вперёд, но не видит цели. Вокруг — холодное, безжизненное пространство, которое написано кристаллическими, острыми мазками.", sold: false },
+        { name: "Самурай", img: "IMG_20260528_202323.webp", year: "2024", size: "Холст 150 х 110 / масло", desc: "Перед вами — не просто воин. Это дух, пойманный в момент высшего напряжения, в точке перерождения. Главный герой здесь — не сталь клинка, а сама стихия.", sold: false },
+        { name: "Однажды в Карелии", img: "photo_2025-03-08_21-29-04.jpg", year: "2025", size: "Холст 150 х 120 / масло", desc: "Красота бывает молчаливой. Это приглашение остановиться. Заметить момент, когда природа не говорит, а дышит.", sold: false },
+        { name: "Нежность", img: "IMG_20260528_185752.webp", year: "2021", size: "Холст 40 х 30 / масло", desc: "Нежность — это не слабость, а внутренняя целостность и достоинство, не нуждающееся в демонстрации.", sold: false },
+        { name: "Макхамба", img: "IMG_20260528_185753.webp", year: "2021", size: "Холст 60 х 50 / масло", desc: "Образ внутренней свободы, застывшей в моменте тишины.", sold: false },
+        { name: "Жан-Мишель", img: "IMG_20260528_185740.webp", year: "2023", size: "Холст 90 х 90 / масло", desc: "Стилизованный портрет, вдохновленный эстетикой Баския. Корона — знак внутренней силы и бунтарства.", sold: true },
+        { name: "Взгляд", img: "IMG_20260528_185755.webp", year: "2022", size: "Холст 70 х 50 / масло / копия", desc: "Геометрия и цвет сливаются в единый образ. Это портрет, где эмоции выражены не словами, а спектром оттенков.", sold: true },
+        { name: "Ты и я", img: "IMG_20260528_185757.webp", year: "2022", size: "Холст 80 х 60 / масло / копия", desc: "Они стоят рядом, но каждый хранит свою тайну. Это история о том, что за привычным обликом всегда скрывается целый калейдоскоп эмоций.", sold: true },
+        { name: "Пляж", img: "IMG_20260528_185759.webp", year: "2020", size: "Холст 30 х 20 / масло", desc: "Это мгновение, застывшее в красках. Шум прибоя и жар солнца, сплетенные в единую симфонию.", sold: true },
+        { name: "Единство", img: "IMG_20260528_185801.webp", year: "2021", size: "Холст 80 х 60 / масло", desc: "В каждом изгибе головного убора — отголосок древних песен, в каждом взгляде — мудрость веков.", sold: true }
     ];
 
-    // Разделяем на доступные и проданные
     const forSale = paintings.filter(p => !p.sold);
-    const soldPaintings = paintings.filter(p => p.sold);
+    const sold = paintings.filter(p => p.sold);
 
-    // Функция создания карточки стопки
-    function createStackCard(painting, index, isForSale) {
-        const card = document.createElement('div');
-        card.className = 'stack-card';
-        card.setAttribute('data-name', painting.name);
-        card.setAttribute('data-img', painting.img);
-        card.setAttribute('data-size', painting.size);
-        card.setAttribute('data-year', painting.year);
-        card.setAttribute('data-desc', painting.desc);
-        card.setAttribute('data-sold', painting.sold);
-        // изображение
+    // Функция генерации случайных параметров для хаотичности
+    function getRandomStyle() {
+        const width = 200 + Math.floor(Math.random() * 180); // 200px – 380px
+        const rotate = (Math.random() - 0.5) * 12; // -6deg .. +6deg
+        const marginTop = Math.random() * 30 - 15; // -15px .. +15px
+        const marginRight = Math.random() * 20;
+        return {
+            width: width + 'px',
+            transform: `rotate(${rotate}deg)`,
+            marginTop: marginTop + 'px',
+            marginRight: marginRight + 'px',
+            zIndex: Math.floor(Math.random() * 10) + 1
+        };
+    }
+
+    function createCard(painting) {
+        const div = document.createElement('div');
+        div.className = 'chaotic-card';
         const img = document.createElement('img');
         img.src = painting.img;
         img.alt = painting.name;
-        img.className = 'stack-card-img';
         img.loading = 'lazy';
-        // название на картинке
-        const titleSpan = document.createElement('span');
-        titleSpan.className = 'stack-card-title';
-        titleSpan.textContent = painting.name;
-        card.appendChild(img);
-        card.appendChild(titleSpan);
-        // обработчик клика для открытия модалки
-        card.addEventListener('click', (e) => {
+        const title = document.createElement('div');
+        title.className = 'title';
+        title.textContent = painting.name;
+        div.appendChild(img);
+        div.appendChild(title);
+        // хаотичные стили
+        const style = getRandomStyle();
+        div.style.width = style.width;
+        div.style.transform = style.transform;
+        div.style.marginTop = style.marginTop;
+        div.style.marginRight = style.marginRight;
+        div.style.zIndex = style.zIndex;
+        // обработчик клика
+        div.addEventListener('click', (e) => {
             e.stopPropagation();
             openModal(painting);
         });
-        return card;
+        return div;
     }
 
-    // Открыть модальное окно с полным описанием
+    // Модальное окно
     function openModal(painting) {
         const modal = document.getElementById('modal');
         const modalImg = document.getElementById('modalImg');
         const modalDesc = document.getElementById('modalDesc');
         modalImg.src = painting.img;
         modalImg.alt = painting.name;
-        // формируем описание
-        let buttonHtml = '';
-        if (!painting.sold) {
-            buttonHtml = `<a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину ${painting.name}" class="modal-btn">Купить</a>`;
-        } else {
-            buttonHtml = `<span class="modal-btn modal-btn-disabled">Продано</span>`;
-        }
+        let buttonHtml = painting.sold
+            ? '<span class="modal-btn modal-btn-disabled">Продано</span>'
+            : `<a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину ${painting.name}" class="modal-btn">Купить</a>`;
         modalDesc.innerHTML = `
             <h3>${painting.name}</h3>
             <p><strong>${painting.size}</strong></p>
@@ -435,31 +392,24 @@
         document.body.style.overflow = 'hidden';
     }
 
-    // Закрыть модальное окно
     function closeModal() {
         const modal = document.getElementById('modal');
         modal.style.display = 'none';
         document.body.style.overflow = '';
     }
 
-    // Рендерим стопки
-    const forSaleContainer = document.getElementById('forSaleStack');
-    const soldContainer = document.getElementById('soldStack');
-
-    forSale.forEach((p, idx) => {
-        forSaleContainer.appendChild(createStackCard(p, idx, true));
-    });
-    soldPaintings.forEach((p, idx) => {
-        soldContainer.appendChild(createStackCard(p, idx, false));
-    });
+    // Рендерим галереи
+    const forSaleContainer = document.getElementById('forSaleGallery');
+    const soldContainer = document.getElementById('soldGallery');
+    forSale.forEach(p => forSaleContainer.appendChild(createCard(p)));
+    sold.forEach(p => soldContainer.appendChild(createCard(p)));
 
     // Кнопка наверх
-    const scrollBtn = document.getElementById('scrollTopBtn');
-    scrollBtn.addEventListener('click', () => {
+    document.getElementById('scrollTopBtn').addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Модальное окно: закрытие
+    // Закрытие модалки
     const modal = document.getElementById('modal');
     const closeModalBtn = document.querySelector('.close-modal');
     closeModalBtn.addEventListener('click', closeModal);
@@ -469,10 +419,6 @@
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
     });
-
-    // небольшая корректировка для корректного отображения стопки: 
-    // добавим дополнительный класс для первой карточки, но необязательно
-    // также можно сделать, чтобы при наведении карточка поднималась выше
 </script>
 </body>
 </html>
