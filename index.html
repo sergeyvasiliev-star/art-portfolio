@@ -49,7 +49,7 @@
             margin: 0 auto;
             padding: 2rem 1.5rem;
             position: relative;
-            z-index: 2;  /* выше водного слоя */
+            z-index: 2;
         }
         header {
             text-align: center;
@@ -283,21 +283,15 @@
             color: #ccc;
         }
 
-        /* Эффект воды (слой поверх всего, но не мешает кликам) */
-        .water-overlay {
+        /* Канвас для водных волн (не перехватывает клики) */
+        .water-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
-        }
-        .water-overlay iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            pointer-events: none;
+            z-index: 10;
         }
 
         /* Адаптивность */
@@ -331,8 +325,6 @@
     </style>
 </head>
 <body>
-
-<div class="water-overlay" id="waterOverlay"></div>
 
 <div class="container">
     <header>
@@ -522,123 +514,89 @@
     <img class="modal-content" id="modalImage">
 </div>
 
+<canvas id="waterCanvas" class="water-canvas"></canvas>
+
 <script>
-    // ========== ЭФФЕКТ ВОДЫ (волны) через iframe ==========
+    // ========== ЭФФЕКТ ВОДНЫХ ВОЛН (расширяющиеся круги, не мешают кликам) ==========
     (function() {
-        const container = document.getElementById('waterOverlay');
-        if (!container) return;
+        const canvas = document.getElementById('waterCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let waves = [];  // массив волн {x, y, radius, opacity}
 
-        const iframe = document.createElement('iframe');
-        iframe.title = "water-ripple";
-        iframe.style.width = "100%";
-        iframe.style.height = "100%";
-        iframe.style.border = "none";
-        iframe.style.pointerEvents = "none";
+        function init() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            // предзаполним массив пустыми волнами
+            for (let i = 0; i < 30; i++) {
+                waves.push({ x: width/2, y: height/2, radius: 0, opacity: 0 });
+            }
+            animate();
+        }
 
-        // Содержимое iframe: canvas с красивыми волнами, реагирующими на мышь
-        const iframeDoc = `<!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <style>
-                body {
-                    margin: 0;
-                    overflow: hidden;
-                    background: transparent;
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.globalCompositeOperation = 'lighter';
+            for (let i = 0; i < waves.length; i++) {
+                const w = waves[i];
+                if (w.radius > 0) {
+                    // создаём радиальный градиент для каждой волны
+                    const gradient = ctx.createRadialGradient(w.x, w.y, 0, w.x, w.y, w.radius);
+                    // цвета: от яркого золотистого к голубоватому и полной прозрачности
+                    gradient.addColorStop(0, `rgba(255, 220, 150, ${w.opacity * 0.7})`);
+                    gradient.addColorStop(0.4, `rgba(100, 180, 220, ${w.opacity * 0.4})`);
+                    gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                    ctx.beginPath();
+                    ctx.arc(w.x, w.y, w.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
+                    // волна расширяется и затухает
+                    w.radius += 6;
+                    w.opacity *= 0.94;
+                    if (w.radius > Math.max(width, height) * 0.8) w.radius = 0;
+                    if (w.opacity < 0.02) w.radius = 0;
                 }
-                canvas {
-                    display: block;
-                    width: 100%;
-                    height: 100%;
-                }
-            </style>
-        </head>
-        <body>
-            <canvas id="waveCanvas"></canvas>
-            <script>
-                (function() {
-                    const canvas = document.getElementById('waveCanvas');
-                    let ctx = canvas.getContext('2d');
-                    let width, height;
-                    let ripples = [];
-                    const MAX_RIPPLES = 40;
-                    
-                    function init() {
-                        width = window.innerWidth;
-                        height = window.innerHeight;
-                        canvas.width = width;
-                        canvas.height = height;
-                        for (let i = 0; i < MAX_RIPPLES; i++) {
-                            ripples.push({ x: width/2, y: height/2, radius: 0, alpha: 0 });
-                        }
-                        animate();
-                    }
-                    
-                    function animate() {
-                        ctx.clearRect(0, 0, width, height);
-                        ctx.globalCompositeOperation = 'lighter';
-                        for (let i = 0; i < ripples.length; i++) {
-                            const r = ripples[i];
-                            if (r.radius > 0) {
-                                // волна с градиентом от яркого к прозрачному
-                                const gradient = ctx.createRadialGradient(r.x, r.y, 0, r.x, r.y, r.radius);
-                                gradient.addColorStop(0, 'rgba(255, 220, 180, ' + (r.alpha * 0.6) + ')');
-                                gradient.addColorStop(0.5, 'rgba(100, 180, 220, ' + (r.alpha * 0.3) + ')');
-                                gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-                                ctx.beginPath();
-                                ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-                                ctx.fillStyle = gradient;
-                                ctx.fill();
-                                // затухание и расширение
-                                r.radius += 8;
-                                r.alpha *= 0.92;
-                                if (r.radius > Math.max(width, height) * 0.8) r.radius = 0;
-                                if (r.alpha < 0.02) r.radius = 0;
-                            }
-                        }
-                        requestAnimationFrame(animate);
-                    }
-                    
-                    function addRipple(x, y) {
-                        for (let i = 0; i < ripples.length; i++) {
-                            if (ripples[i].radius === 0) {
-                                ripples[i] = { x: x, y: y, radius: 20, alpha: 0.9 };
-                                return;
-                            }
-                        }
-                        // если все заняты, перезаписываем самую старую (с наименьшим радиусом)
-                        let oldest = ripples.reduce((a,b) => (a.radius < b.radius ? a : b));
-                        oldest.x = x;
-                        oldest.y = y;
-                        oldest.radius = 20;
-                        oldest.alpha = 0.9;
-                    }
-                    
-                    window.addEventListener('resize', function() {
-                        width = window.innerWidth;
-                        height = window.innerHeight;
-                        canvas.width = width;
-                        canvas.height = height;
-                    });
-                    
-                    window.addEventListener('mousemove', function(e) {
-                        addRipple(e.clientX, e.clientY);
-                    });
-                    
-                    window.addEventListener('touchmove', function(e) {
-                        if (e.touches.length) {
-                            addRipple(e.touches[0].clientX, e.touches[0].clientY);
-                        }
-                    });
-                    
-                    init();
-                })();
-            <\/script>
-        </body>
-        </html>`;
+            }
+            requestAnimationFrame(animate);
+        }
 
-        iframe.srcdoc = iframeDoc;
-        container.appendChild(iframe);
+        function addWave(x, y) {
+            // ищем свободный слот (radius === 0)
+            for (let i = 0; i < waves.length; i++) {
+                if (waves[i].radius === 0) {
+                    waves[i] = { x: x, y: y, radius: 15, opacity: 0.9 };
+                    return;
+                }
+            }
+            // если все заняты, перезаписываем самую старую (с наименьшим радиусом)
+            let oldest = waves.reduce((a,b) => (a.radius < b.radius ? a : b));
+            oldest.x = x;
+            oldest.y = y;
+            oldest.radius = 15;
+            oldest.opacity = 0.9;
+        }
+
+        window.addEventListener('resize', () => {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            addWave(e.clientX, e.clientY);
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches.length) {
+                addWave(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        });
+
+        init();
     })();
 
     // ========== КНОПКА НАВЕРХ ==========
