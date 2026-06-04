@@ -48,8 +48,6 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
-            position: relative;
-            z-index: 2;
         }
         header {
             text-align: center;
@@ -283,17 +281,6 @@
             color: #ccc;
         }
 
-        /* Канвас для водных волн (не перехватывает клики) */
-        .water-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
-        }
-
         /* Адаптивность */
         @media (max-width: 900px) {
             .card {
@@ -514,91 +501,7 @@
     <img class="modal-content" id="modalImage">
 </div>
 
-<canvas id="waterCanvas" class="water-canvas"></canvas>
-
 <script>
-    // ========== ЭФФЕКТ ВОДНЫХ ВОЛН (расширяющиеся круги, не мешают кликам) ==========
-    (function() {
-        const canvas = document.getElementById('waterCanvas');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let waves = [];  // массив волн {x, y, radius, opacity}
-
-        function init() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-            // предзаполним массив пустыми волнами
-            for (let i = 0; i < 30; i++) {
-                waves.push({ x: width/2, y: height/2, radius: 0, opacity: 0 });
-            }
-            animate();
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            ctx.globalCompositeOperation = 'lighter';
-            for (let i = 0; i < waves.length; i++) {
-                const w = waves[i];
-                if (w.radius > 0) {
-                    // создаём радиальный градиент для каждой волны
-                    const gradient = ctx.createRadialGradient(w.x, w.y, 0, w.x, w.y, w.radius);
-                    // цвета: от яркого золотистого к голубоватому и полной прозрачности
-                    gradient.addColorStop(0, `rgba(255, 220, 150, ${w.opacity * 0.7})`);
-                    gradient.addColorStop(0.4, `rgba(100, 180, 220, ${w.opacity * 0.4})`);
-                    gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-                    ctx.beginPath();
-                    ctx.arc(w.x, w.y, w.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = gradient;
-                    ctx.fill();
-                    // волна расширяется и затухает
-                    w.radius += 6;
-                    w.opacity *= 0.94;
-                    if (w.radius > Math.max(width, height) * 0.8) w.radius = 0;
-                    if (w.opacity < 0.02) w.radius = 0;
-                }
-            }
-            requestAnimationFrame(animate);
-        }
-
-        function addWave(x, y) {
-            // ищем свободный слот (radius === 0)
-            for (let i = 0; i < waves.length; i++) {
-                if (waves[i].radius === 0) {
-                    waves[i] = { x: x, y: y, radius: 15, opacity: 0.9 };
-                    return;
-                }
-            }
-            // если все заняты, перезаписываем самую старую (с наименьшим радиусом)
-            let oldest = waves.reduce((a,b) => (a.radius < b.radius ? a : b));
-            oldest.x = x;
-            oldest.y = y;
-            oldest.radius = 15;
-            oldest.opacity = 0.9;
-        }
-
-        window.addEventListener('resize', () => {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-        });
-
-        window.addEventListener('mousemove', (e) => {
-            addWave(e.clientX, e.clientY);
-        });
-
-        window.addEventListener('touchmove', (e) => {
-            if (e.touches.length) {
-                addWave(e.touches[0].clientX, e.touches[0].clientY);
-            }
-        });
-
-        init();
-    })();
-
     // ========== КНОПКА НАВЕРХ ==========
     const scrollBtn = document.getElementById('scrollTopBtn');
     if (scrollBtn) {
