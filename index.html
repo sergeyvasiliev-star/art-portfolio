@@ -30,10 +30,8 @@
 
         /* ФОНОВОЕ ИЗОБРАЖЕНИЕ НА ВСЮ СТРАНИЦУ */
         body {
-            /* ЗАМЕНИТЕ ИМЯ ФАЙЛА, ЕСЛИ ВЫ ПЕРЕИМЕНОВАЛИ СОЛНЦЕ */
             background: url('солнце%20—%20копия%202.jpg') center / cover fixed #f4f4f4;
-            /* cover — без зазоров на любом экране, fixed — фон не скроллится */
-            color: #4a4a4a;
+            color: #3a3a3a;
             font-family: 'EastSeaDoc', 'Spaghetti Cyrillic', 'Segoe UI', Roboto, sans-serif;
             font-size: 1.1rem;
             line-height: 1.5;
@@ -56,8 +54,8 @@
             font-weight: normal;
             letter-spacing: 4px;
             text-transform: none;
-            color: #000000;
-            text-shadow: 1px 1px 0 #000000;
+            color: #1a1a1a;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.25); /* усиленная тень для читаемости */
             margin-bottom: 1rem;
             cursor: pointer;
         }
@@ -69,20 +67,21 @@
             flex-wrap: wrap;
         }
         nav a {
-            color: #2c2c2c;
+            color: #1a1a1a;
             text-decoration: none;
             font-size: 2.8rem;
             transition: all 0.2s ease;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.3);
         }
         nav a:hover {
             color: #000000;
-            text-shadow: 0 0 2px rgba(0,0,0,0.2);
+            text-shadow: 0 0 4px rgba(0,0,0,0.3);
         }
         h2 {
             color: #1f1f1f;
             font-size: 2.8rem;
             font-weight: 300;
-            border-left: 3px solid #c0c0c0;
+            border-left: 3px solid #c0a070;
             padding-left: 1rem;
             margin-bottom: 2rem;
         }
@@ -96,18 +95,17 @@
             display: flex;
             flex-direction: row;
             gap: 2rem;
-            background: rgba(255, 255, 255, 0.95);
+            background: #fef7e6;   /* тёплый кремовый фон */
             border-radius: 24px;
             padding: 1.5rem;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
             transition: box-shadow 0.2s, transform 0.2s;
             cursor: pointer;
             width: 100%;
             align-items: flex-start;
-            backdrop-filter: blur(0px);
         }
         .card:hover {
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
         }
         .card-img {
             flex: 1;
@@ -135,7 +133,7 @@
             text-align: left;
         }
         .card-title {
-            color: #1f1f1f;
+            color: #2c2c2c;
             font-size: 3rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
@@ -165,21 +163,21 @@
             color: #000000;
         }
         .btn-disabled {
-            background: #f0f0f0;
-            color: #999999;
+            background: #e0d8c8;
+            color: #8a7e6c;
             cursor: default;
             pointer-events: none;
         }
         .about {
-            background: rgba(255, 255, 255, 0.95);
+            background: #fef7e6;   /* единый тёплый фон */
             padding: 1.5rem;
             border-radius: 20px;
-            border-left: 4px solid #c0c0c0;
+            border-left: 4px solid #c0a070;
             margin-bottom: 3rem;
             font-size: 2rem;
             line-height: 1.4;
-            color: #4a4a4a;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            color: #3a3a3a;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
         .contacts {
             display: flex;
@@ -198,12 +196,13 @@
         }
         .contacts a:hover {
             color: #000000 !important;
+            text-shadow: 0 0 2px rgba(0,0,0,0.1);
         }
         footer {
             text-align: center;
             padding: 2rem 0;
             font-size: 1.6rem;
-            color: #555555;
+            color: #4a4a4a;
             border-top: 1px solid rgba(224,224,224,0.6);
         }
         footer p {
@@ -456,7 +455,6 @@
                     <div class="card-info">
                         <div class="card-title">Единство</div>
                         <div class="card-price">Холст 80 х 60 / масло</div>
-                        <div class="card-price">Холст 80 х 60 / масло / копия</div>
                         <div class="card-price">2021 год</div>
                         <div class="card-price">В каждом изгибе головного убора — отголосок древних песен, в каждом взгляде — мудрость веков.</div>
                         <a href="#" class="btn btn-disabled">Продано</a>
@@ -497,9 +495,7 @@
 <script>
     const scrollBtn = document.getElementById('scrollTopBtn');
     if (scrollBtn) {
-        scrollBtn.addEventListener('click', function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     }
 
     const cards = document.querySelectorAll('.card');
@@ -508,8 +504,8 @@
     const closeBtn = document.querySelector('.close-btn');
 
     cards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            if (e.target.classList && e.target.classList.contains('btn')) return;
+        card.addEventListener('click', (e) => {
+            if (e.target.classList?.contains('btn')) return;
             if (e.target.tagName === 'A') return;
             let imgSrc = card.getAttribute('data-img');
             if (!imgSrc) {
@@ -531,12 +527,8 @@
     }
 
     closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
-    });
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'flex') closeModal(); });
 </script>
 </body>
 </html>
