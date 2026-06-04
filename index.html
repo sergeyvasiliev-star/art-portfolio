@@ -20,76 +20,38 @@
             font-style: normal;
             font-display: swap;
         }
-
-        /* ----- ОГНЕННЫЕ АНИМАЦИИ ----- */
-        @keyframes breathingFire {
-            0% { color: #7A7666; text-shadow: 0 0 2px #ff6600, 0 0 4px #ff4400; }
-            25% { color: #ffaa55; text-shadow: 0 0 6px #ff8800, 0 0 10px #ff5500; }
-            50% { color: #ffcc77; text-shadow: 0 0 10px #ffaa33, 0 0 15px #ff7700; }
-            75% { color: #ffaa55; text-shadow: 0 0 6px #ff8800, 0 0 10px #ff5500; }
-            100% { color: #7A7666; text-shadow: 0 0 2px #ff6600, 0 0 4px #ff4400; }
+        @font-face {
+            font-family: 'TWIGS4kids';
+            src: url('fonts/TWIGS4kids-Invert_0.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
         }
 
-        @keyframes fireGlow {
-            0% {
-                text-shadow: 0 0 20px #fefcc9,
-                             10px -10px 30px #feec85,
-                             -20px -20px 40px #ffae34,
-                             20px -40px 50px #ec760c,
-                             -20px -60px 60px #cd4606,
-                             0 -80px 70px #973716,
-                             10px -90px 80px #451b0e;
-            }
-            100% {
-                text-shadow: 0 0 20px #fefcc9,
-                             10px -10px 30px #fefcc9,
-                             -20px -20px 40px #feec85,
-                             22px -42px 60px #ffae34,
-                             -22px -58px 50px #ec760c,
-                             0 -82px 80px #cd4606,
-                             10px -90px 80px #973716;
-            }
-        }
-
-        /* ----- ОСНОВНЫЕ СТИЛИ ----- */
+        /* ----- ОСНОВНЫЕ СТИЛИ (СВЕТЛАЯ СМЯГЧЁННАЯ ВЕРСИЯ) ----- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* ФОНОВОЕ ИЗОБРАЖЕНИЕ СОЛНЦА (ПОЛУПРОЗРАЧНО) */
+        /* ФОНОВОЕ ИЗОБРАЖЕНИЕ НА ВСЮ СТРАНИЦУ */
         body {
-            background: #f0f1f1 url('солнце%20—%20копия%202.jpg') center / cover fixed;
-            color: #40443d;
+            background: url('солнце%20—%20копия%202.jpg') center / cover fixed #f4f4f4;
+            color: #3a3a3a;
             font-family: 'EastSeaDoc', 'Spaghetti Cyrillic', 'Segoe UI', Roboto, sans-serif;
-            font-size: 1rem;
+            font-size: 1.1rem;
             line-height: 1.5;
-            position: relative;
-        }
-        /* Полупрозрачный слой поверх фоновой картинки для мягкости */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(240, 241, 241, 0.7);
-            z-index: 0;
-            pointer-events: none;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
-            position: relative;
-            z-index: 2;
         }
         header {
             text-align: center;
-            border-bottom: 1px solid rgba(64,68,61,0.2);
+            border-bottom: 1px solid rgba(224,224,224,0.6);
             padding-bottom: 2rem;
             margin-bottom: 3rem;
         }
@@ -99,14 +61,11 @@
             font-weight: normal;
             letter-spacing: 4px;
             text-transform: none;
-            color: #40443d;
+            color: #1a1a1a;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.25); /* усиленная тень для читаемости */
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.25);
             margin-bottom: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        h1:hover {
-            animation: fireGlow 1s ease-in-out infinite alternate;
-            color: #ffe6b3;
         }
         nav {
             display: flex;
@@ -116,18 +75,19 @@
             flex-wrap: wrap;
         }
         nav a {
-            color: #6a6a6a;
+            color: #1a1a1a;
             text-decoration: none;
-            font-size: 2rem;
-            transition: color 0.2s;
+            font-size: 2.8rem;
+            transition: all 0.2s ease;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.3);
         }
         nav a:hover {
-            color: #40443d;
-            text-shadow: 0 0 4px rgba(64,68,61,0.3);
+            color: #000000;
+            text-shadow: 0 0 4px rgba(0,0,0,0.3);
         }
         h2 {
-            color: #40443d;
-            font-size: 2.4rem;
+            color: #1f1f1f;
+            font-size: 2.8rem;
             font-weight: 300;
             border-left: 3px solid #c0a070;
             padding-left: 1rem;
@@ -136,97 +96,97 @@
         .gallery {
             display: flex;
             flex-direction: column;
-            gap: 3rem;
+            gap: 2rem;
             margin-bottom: 3rem;
         }
         .card {
             display: flex;
             flex-direction: row;
             gap: 2rem;
-            background: rgba(255, 255, 255, 0.92);
+            background: #fef7e6;   /* тёплый кремовый фон */
+            background: #fef7e6;
             border-radius: 24px;
             padding: 1.5rem;
-            backdrop-filter: blur(0px);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transition: box-shadow 0.2s, transform 0.2s;
             cursor: pointer;
             width: 100%;
-            align-items: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            align-items: flex-start;
         }
         .card:hover {
-            transform: scale(1.01);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-            background: rgba(255,255,255,1);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
         }
         .card-img {
             flex: 1;
             background: #fafafa;
-            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
+            border-radius: 20px;
+            transition: transform 0.2s ease;
+        }
+        .card-img:hover {
+            transform: scale(1.01);
         }
         .card-img img {
             width: 100%;
             height: auto;
+            object-fit: cover;
             display: block;
-            transition: transform 0.2s;
-        }
-        .card-img:hover img {
-            transform: scale(1.02);
+            pointer-events: none;
         }
         .card-info {
             flex: 1;
             padding: 0 0.5rem;
+            text-align: left;
         }
         .card-title {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
             color: #2c2c2c;
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
         .card-price {
-            font-size: 1.4rem;
-            margin-bottom: 0.3rem;
             color: #4a4a4a;
-        }
-        .sold {
-            color: #a0a0a0;
-            text-decoration: line-through;
+            font-size: 2rem;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
         }
         .btn {
             display: inline-block;
             background: #e8e8e8;
             border: none;
-            padding: 0.6rem 1.2rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 40px;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             cursor: pointer;
             transition: background 0.2s, color 0.2s;
-            margin-top: 0.8rem;
-            animation: breathingFire 1.8s ease-in-out infinite;
+            margin-top: 0.5rem;
             color: #2c2c2c;
         }
         .btn:hover {
             background: #d4d4d4;
-            color: #000 !important;
-            text-shadow: 0 0 8px #ffaa33;
+            color: #000000;
         }
         .btn-disabled {
-            background: #e0e0e0;
-            color: #999;
+            background: #e0d8c8;
+            color: #8a7e6c;
             cursor: default;
-            animation: none;
             pointer-events: none;
         }
         .about {
-            background: rgba(255,255,255,0.85);
-            padding: 1.8rem;
-            border-radius: 24px;
+            background: #fef7e6;   /* единый тёплый фон */
+            background: #fef7e6;
+            padding: 1.5rem;
+            border-radius: 20px;
             border-left: 4px solid #c0a070;
             margin-bottom: 3rem;
-            font-size: 1.4rem;
+            font-size: 2rem;
             line-height: 1.4;
-            backdrop-filter: blur(2px);
+            color: #3a3a3a;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
         .contacts {
@@ -238,49 +198,55 @@
             padding-left: 1rem;
         }
         .contacts a {
-            color: #4a4a4a;
+            color: #2c2c2c !important;
             text-decoration: none;
-            font-size: 1.4rem;
             transition: 0.2s;
-            padding: 0.3rem 0;
+            font-size: 2rem;
+            padding: 0.5rem 0;
         }
         .contacts a:hover {
-            color: #1f1f1f;
+            color: #000000 !important;
             text-shadow: 0 0 2px rgba(0,0,0,0.1);
         }
         footer {
             text-align: center;
             padding: 2rem 0;
-            font-size: 1.2rem;
-            color: #777;
-            border-top: 1px solid rgba(0,0,0,0.1);
+            font-size: 1.6rem;
+            color: #4a4a4a;
+            border-top: 1px solid rgba(224,224,224,0.6);
+            font-family: 'TWIGS4kids', 'EastSeaDoc', sans-serif;
         }
         footer p {
             margin: 0.2rem 0;
         }
+
+        /* Кнопка "Наверх" */
         .scroll-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
             background: #2c2c2c;
-            color: #fff;
-            width: 48px;
-            height: 48px;
+            color: #ffffff;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.2s;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 100;
             font-size: 28px;
             font-weight: bold;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            text-decoration: none;
         }
         .scroll-top:hover {
             background: #1a1a1a;
             transform: translateY(-3px);
         }
+
+        /* Модальное окно */
         .modal {
             display: none;
             position: fixed;
@@ -295,52 +261,56 @@
             justify-content: center;
         }
         .modal-content {
-            max-width: 85%;
-            max-height: 85%;
+            max-width: 90%;
+            max-height: 90%;
             object-fit: contain;
             border-radius: 12px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
         }
         .close-btn {
             position: absolute;
-            top: 25px;
+            top: 20px;
             right: 35px;
-            color: #fff;
+            color: #f1f1f1;
             font-size: 40px;
             font-weight: bold;
-            transition: 0.2s;
+            transition: 0.3s;
             cursor: pointer;
             background: none;
             border: none;
+            font-family: monospace;
         }
         .close-btn:hover {
-            color: #bbb;
+            color: #ccc;
         }
+
+        /* Адаптивность */
         @media (max-width: 900px) {
             .card {
                 flex-direction: column;
-                text-align: center;
+                gap: 1.5rem;
             }
             .card-info {
-                text-align: center;
-            }
-            nav a {
-                font-size: 1.5rem;
-            }
-            h1 {
-                font-size: 3rem;
+                padding: 0;
             }
         }
-        @media (max-width: 640px) {
-            .card-title { font-size: 1.8rem; }
-            .card-price { font-size: 1.2rem; }
-            .btn { font-size: 1rem; }
-            .about { font-size: 1.2rem; }
-            .contacts a { font-size: 1.2rem; }
-            h1 { font-size: 2.5rem; }
+        @media (max-width: 768px) {
+            .card-title { font-size: 2.4rem; }
+            .card-price { font-size: 1.6rem; }
+            .btn { font-size: 1.4rem; }
+            nav a { font-size: 2rem; }
+            .about { font-size: 1.6rem; }
+            .contacts a { font-size: 1.6rem; }
+            h1 { font-size: 3rem; }
             .container { padding: 1rem; }
-            footer { font-size: 1rem; }
-            .scroll-top { width: 40px; height: 40px; font-size: 24px; bottom: 20px; right: 20px; }
+            footer { font-size: 1.2rem; }
+            .scroll-top {
+                width: 40px;
+                height: 40px;
+                font-size: 22px;
+                bottom: 20px;
+                right: 20px;
+            }
         }
     </style>
 </head>
@@ -360,7 +330,7 @@
         <section id="gallery">
             <h2>Доступные работы</h2>
             <div class="gallery">
-                <!-- ===== КАРТИНЫ В ПРОДАЖЕ ===== -->
+                <!-- ========== КАРТИНЫ В ПРОДАЖЕ ========== -->
                 <!-- 1. Летящий демон Врубеля -->
                 <div class="card" data-img="photo_2024-12-25_14-56-57.jpg">
                     <div class="card-img">
@@ -370,8 +340,7 @@
                         <div class="card-title">Летящий демон Врубеля</div>
                         <div class="card-price">Холст 150 х 110 / масло</div>
                         <div class="card-price">2024 год</div>
-                        <div class="card-title">100 000 руб</div>
-                        <div class="card-price">Взгляд устремлён вперёд, но не видит цели. Вокруг — холодное, безжизненное пространство...</div>
+                        <div class="card-price">Взгляд устремлён вперёд, но не видит цели. Вокруг — холодное, безжизненное пространство, которое написано кристаллическими, острыми мазками.</div>
                         <a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину Летящий демон Врубеля" class="btn">Купить</a>
                     </div>
                 </div>
@@ -385,8 +354,7 @@
                         <div class="card-title">Самурай</div>
                         <div class="card-price">Холст 150 х 110 / масло</div>
                         <div class="card-price">2024 год</div>
-                        <div class="card-title">100 000 руб</div>
-                        <div class="card-price">Перед вами — не просто воин. Это дух, пойманный в момент высшего напряжения...</div>
+                        <div class="card-price">Перед вами — не просто воин. Это дух, пойманный в момент высшего напряжения, в точке перерождения. Главный герой здесь — не сталь клинка, а сама стихия.</div>
                         <a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину Самурай" class="btn">Купить</a>
                     </div>
                 </div>
@@ -400,8 +368,7 @@
                         <div class="card-title">Однажды в Карелии</div>
                         <div class="card-price">Холст 150 х 120 / масло</div>
                         <div class="card-price">2025 год</div>
-                        <div class="card-title">100 000 руб</div>
-                        <div class="card-price">Красота бывает молчаливой. Приглашение остановиться и заметить момент...</div>
+                        <div class="card-price">Красота бывает молчаливой. Это приглашение остановиться. Заметить момент, когда природа не говорит, а дышит.</div>
                         <a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину Однажды в Карелии" class="btn">Купить</a>
                     </div>
                 </div>
@@ -415,8 +382,7 @@
                         <div class="card-title">Нежность</div>
                         <div class="card-price">Холст 40 х 30 / масло</div>
                         <div class="card-price">2021 год</div>
-                        <div class="card-title">10 000 руб</div>
-                        <div class="card-price">Нежность — это не слабость, а внутренняя целостность и достоинство...</div>
+                        <div class="card-price">Нежность — это не слабость, а внутренняя целостность и достоинство, не нуждающееся в демонстрации.</div>
                         <a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину Нежность" class="btn">Купить</a>
                     </div>
                 </div>
@@ -430,14 +396,13 @@
                         <div class="card-title">Макхамба</div>
                         <div class="card-price">Холст 60 х 50 / масло</div>
                         <div class="card-price">2021 год</div>
-                        <div class="card-title">10 000 руб</div>
                         <div class="card-price">Образ внутренней свободы, застывшей в моменте тишины.</div>
                         <a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину Макхамба" class="btn">Купить</a>
                     </div>
                 </div>
 
-                <!-- ===== ПРОДАННЫЕ КАРТИНЫ ===== -->
-                <!-- 6. Жан-Мишель (продана) -->
+                <!-- ========== ПРОДАННЫЕ КАРТИНЫ ========== -->
+                <!-- 6. Жан-Мишель -->
                 <div class="card" data-img="IMG_20260528_185740.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185740.webp" alt="Жан-Мишель">
@@ -446,13 +411,12 @@
                         <div class="card-title">Жан-Мишель</div>
                         <div class="card-price">Холст 90 х 90 / масло</div>
                         <div class="card-price">2023 год</div>
-                        <div class="card-price sold">Продано</div>
-                        <div class="card-price">Стилизованный портрет, вдохновленный эстетикой Баския. Корона — знак внутренней силы.</div>
+                        <div class="card-price">Стилизованный портрет, вдохновленный эстетикой Баския. Корона — знак внутренней силы и бунтарства.</div>
                         <a href="#" class="btn btn-disabled">Продано</a>
                     </div>
                 </div>
 
-                <!-- 7. Взгляд (продана) -->
+                <!-- 7. Взгляд -->
                 <div class="card" data-img="IMG_20260528_185755.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185755.webp" alt="Взгляд">
@@ -461,13 +425,12 @@
                         <div class="card-title">Взгляд</div>
                         <div class="card-price">Холст 70 х 50 / масло / копия</div>
                         <div class="card-price">2022 год</div>
-                        <div class="card-price sold">Продано</div>
-                        <div class="card-price">Геометрия и цвет сливаются в единый образ. Портрет, где эмоции выражены спектром оттенков.</div>
+                        <div class="card-price">Геометрия и цвет сливаются в единый образ. Это портрет, где эмоции выражены не словами, а спектром оттенков.</div>
                         <a href="#" class="btn btn-disabled">Продано</a>
                     </div>
                 </div>
 
-                <!-- 8. Ты и я (продана) -->
+                <!-- 8. Ты и я -->
                 <div class="card" data-img="IMG_20260528_185757.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185757.webp" alt="Ты и я">
@@ -476,13 +439,12 @@
                         <div class="card-title">Ты и я</div>
                         <div class="card-price">Холст 80 х 60 / масло / копия</div>
                         <div class="card-price">2022 год</div>
-                        <div class="card-price sold">Продано</div>
-                        <div class="card-price">Они стоят рядом, но каждый хранит свою тайну. Калейдоскоп эмоций за привычным обликом.</div>
+                        <div class="card-price">Они стоят рядом, но каждый хранит свою тайну. Это история о том, что за привычным обликом всегда скрывается целый калейдоскоп эмоций.</div>
                         <a href="#" class="btn btn-disabled">Продано</a>
                     </div>
                 </div>
 
-                <!-- 9. Пляж (продана) -->
+                <!-- 9. Пляж -->
                 <div class="card" data-img="IMG_20260528_185759.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185759.webp" alt="Пляж">
@@ -491,13 +453,12 @@
                         <div class="card-title">Пляж</div>
                         <div class="card-price">Холст 30 х 20 / масло</div>
                         <div class="card-price">2020 год</div>
-                        <div class="card-price sold">Продано</div>
-                        <div class="card-price">Мгновение, застывшее в красках. Шум прибоя и жар солнца, сплетенные в симфонию.</div>
+                        <div class="card-price">Это мгновение, застывшее в красках. Шум прибоя и жар солнца, сплетенные в единую симфонию.</div>
                         <a href="#" class="btn btn-disabled">Продано</a>
                     </div>
                 </div>
 
-                <!-- 10. Единство (продана) -->
+                <!-- 10. Единство -->
                 <div class="card" data-img="IMG_20260528_185801.webp">
                     <div class="card-img">
                         <img src="IMG_20260528_185801.webp" alt="Единство">
@@ -506,7 +467,6 @@
                         <div class="card-title">Единство</div>
                         <div class="card-price">Холст 80 х 60 / масло</div>
                         <div class="card-price">2021 год</div>
-                        <div class="card-price sold">Продано</div>
                         <div class="card-price">В каждом изгибе головного убора — отголосок древних песен, в каждом взгляде — мудрость веков.</div>
                         <a href="#" class="btn btn-disabled">Продано</a>
                     </div>
@@ -533,6 +493,7 @@
     <footer>
         <p>2025</p>
         <p> · все права защищены · </p>
+        <p> · all rights reserved · </p>
     </footer>
 </div>
 
@@ -543,131 +504,20 @@
     <img class="modal-content" id="modalImage">
 </div>
 
-<!-- ЭФФЕКТ ВОДЫ (iframe) — добавляем в самый конец, чтобы не перекрывать клики -->
-<div class="water-overlay" id="waterOverlay">
-    <!-- iframe будет создан скриптом, чтобы не грузить лишнее -->
-</div>
-
 <script>
-    // ========== ЭФФЕКТ ВОДЫ (как в Tilda) ==========
-    (function() {
-        const container = document.getElementById('waterOverlay');
-        if (!container) return;
-        
-        // Создаём iframe и вставляем в него готовую водную анимацию (простая canvas-волна)
-        const iframe = document.createElement('iframe');
-        iframe.title = "water-ripple";
-        iframe.style.width = "100%";
-        iframe.style.height = "100%";
-        iframe.style.border = "none";
-        iframe.style.pointerEvents = "none";
-        
-        // Генерируем содержимое iframe: canvas с плавной рябью, реагирующей на движение мыши
-        const iframeDoc = `<!DOCTYPE html>
-        <html>
-        <head>
-            <style>
-                body { margin: 0; overflow: hidden; background: transparent; }
-                canvas { display: block; width: 100%; height: 100%; }
-            </style>
-        </head>
-        <body>
-            <canvas id="waterCanvas"></canvas>
-            <script>
-                (function() {
-                    const canvas = document.getElementById('waterCanvas');
-                    let ctx = canvas.getContext('2d');
-                    let width, height;
-                    let rippleArray = [];
-                    
-                    function init() {
-                        width = window.innerWidth;
-                        height = window.innerHeight;
-                        canvas.width = width;
-                        canvas.height = height;
-                        for (let i = 0; i < 30; i++) {
-                            rippleArray.push({ x: width/2, y: height/2, radius: 0, strength: 0 });
-                        }
-                        animate();
-                    }
-                    
-                    function animate() {
-                        ctx.clearRect(0, 0, width, height);
-                        ctx.globalCompositeOperation = 'lighter';
-                        for (let i = 0; i < rippleArray.length; i++) {
-                            let r = rippleArray[i];
-                            if (r.radius > 0) {
-                                const gradient = ctx.createRadialGradient(r.x, r.y, 0, r.x, r.y, r.radius);
-                                gradient.addColorStop(0, 'rgba(255, 200, 100, 0.35)');
-                                gradient.addColorStop(0.6, 'rgba(80, 150, 200, 0.15)');
-                                gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-                                ctx.beginPath();
-                                ctx.arc(r.x, r.y, r.radius, 0, Math.PI*2);
-                                ctx.fillStyle = gradient;
-                                ctx.fill();
-                                r.radius *= 0.97;
-                                r.strength *= 0.95;
-                                if (r.radius < 8) r.radius = 0;
-                            }
-                        }
-                        requestAnimationFrame(animate);
-                    }
-                    
-                    function addRipple(x, y) {
-                        for (let i = 0; i < rippleArray.length; i++) {
-                            if (rippleArray[i].radius === 0) {
-                                rippleArray[i] = { x: x, y: y, radius: 35, strength: 0.8 };
-                                return;
-                            }
-                        }
-                        let oldest = rippleArray.reduce((a,b) => (a.radius < b.radius ? a : b));
-                        oldest.x = x; oldest.y = y; oldest.radius = 35; oldest.strength = 0.8;
-                    }
-                    
-                    window.addEventListener('resize', function() {
-                        width = window.innerWidth;
-                        height = window.innerHeight;
-                        canvas.width = width;
-                        canvas.height = height;
-                    });
-                    
-                    window.addEventListener('mousemove', function(e) {
-                        addRipple(e.clientX, e.clientY);
-                    });
-                    
-                    window.addEventListener('touchmove', function(e) {
-                        if (e.touches.length) {
-                            addRipple(e.touches[0].clientX, e.touches[0].clientY);
-                        }
-                    });
-                    
-                    init();
-                })();
-            <\/script>
-        </body>
-        </html>`;
-        
-        iframe.srcdoc = iframeDoc;
-        container.appendChild(iframe);
-    })();
-
-    // ========== КНОПКА НАВЕРХ ==========
     const scrollBtn = document.getElementById('scrollTopBtn');
     if (scrollBtn) {
-        scrollBtn.addEventListener('click', function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     }
 
-    // ========== МОДАЛЬНОЕ ОКНО ==========
     const cards = document.querySelectorAll('.card');
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
-    const closeModalBtn = document.querySelector('.close-btn');
+    const closeBtn = document.querySelector('.close-btn');
 
     cards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            if (e.target.classList && e.target.classList.contains('btn')) return;
+        card.addEventListener('click', (e) => {
+            if (e.target.classList?.contains('btn')) return;
             if (e.target.tagName === 'A') return;
             let imgSrc = card.getAttribute('data-img');
             if (!imgSrc) {
@@ -687,13 +537,10 @@
         modalImg.src = '';
         document.body.style.overflow = '';
     }
-    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
-    });
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'flex') closeModal(); });
 </script>
 </body>
 </html>
