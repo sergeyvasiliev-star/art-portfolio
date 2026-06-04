@@ -62,7 +62,6 @@
             letter-spacing: 4px;
             text-transform: none;
             color: #1a1a1a;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.25); /* усиленная тень для читаемости */
             text-shadow: 2px 2px 6px rgba(0,0,0,0.25);
             margin-bottom: 1rem;
             cursor: pointer;
@@ -103,7 +102,6 @@
             display: flex;
             flex-direction: row;
             gap: 2rem;
-            background: #fef7e6;   /* тёплый кремовый фон */
             background: #fef7e6;
             border-radius: 24px;
             padding: 1.5rem;
@@ -178,7 +176,6 @@
             pointer-events: none;
         }
         .about {
-            background: #fef7e6;   /* единый тёплый фон */
             background: #fef7e6;
             padding: 1.5rem;
             border-radius: 20px;
@@ -282,6 +279,17 @@
         }
         .close-btn:hover {
             color: #ccc;
+        }
+
+        /* ----- ЭФФЕКТ ВОДЫ (canvas) ----- */
+        .water-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;   /* чтобы можно было кликать сквозь canvas */
+            z-index: 10;
         }
 
         /* Адаптивность */
@@ -504,12 +512,99 @@
     <img class="modal-content" id="modalImage">
 </div>
 
+<!-- Эффект водной ряби -->
+<canvas id="waterCanvas" class="water-canvas"></canvas>
+
 <script>
+    // ========== ВОДНЫЙ ЭФФЕКТ (рябь от мыши) ==========
+    (function() {
+        const canvas = document.getElementById('waterCanvas');
+        if (!canvas) return;
+        let ctx = canvas.getContext('2d');
+        let width, height;
+        let rippleArray = [];
+
+        function initWater() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            // Создаём массив для хранения активных кругов ряби
+            for (let i = 0; i < 35; i++) {
+                rippleArray.push({ x: width/2, y: height/2, radius: 0, strength: 0 });
+            }
+            animate();
+        }
+
+        function animate() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, width, height);
+            ctx.globalCompositeOperation = 'lighter';
+            for (let i = 0; i < rippleArray.length; i++) {
+                let r = rippleArray[i];
+                if (r.radius > 0) {
+                    // Градиент от центра к краям
+                    const gradient = ctx.createRadialGradient(r.x, r.y, 0, r.x, r.y, r.radius);
+                    gradient.addColorStop(0, `rgba(255, 220, 150, ${r.strength * 0.45})`);
+                    gradient.addColorStop(0.6, `rgba(100, 160, 210, ${r.strength * 0.2})`);
+                    gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                    ctx.beginPath();
+                    ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
+                    // уменьшаем радиус и силу
+                    r.radius *= 0.96;
+                    r.strength *= 0.94;
+                    if (r.radius < 5) r.radius = 0;
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        function addRipple(x, y) {
+            // ищем свободный слот (с радиусом 0)
+            for (let i = 0; i < rippleArray.length; i++) {
+                if (rippleArray[i].radius === 0) {
+                    rippleArray[i] = { x: x, y: y, radius: 32, strength: 0.85 };
+                    return;
+                }
+            }
+            // если все заняты, перезаписываем самый старый (с наименьшим радиусом)
+            let oldest = rippleArray.reduce((a,b) => (a.radius < b.radius ? a : b));
+            oldest.x = x;
+            oldest.y = y;
+            oldest.radius = 32;
+            oldest.strength = 0.85;
+        }
+
+        window.addEventListener('resize', function() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        });
+
+        window.addEventListener('mousemove', function(e) {
+            addRipple(e.clientX, e.clientY);
+        });
+
+        // для мобильных устройств
+        window.addEventListener('touchmove', function(e) {
+            if (e.touches.length) {
+                addRipple(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        });
+
+        initWater();
+    })();
+
+    // ========== КНОПКА НАВЕРХ ==========
     const scrollBtn = document.getElementById('scrollTopBtn');
     if (scrollBtn) {
         scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     }
 
+    // ========== МОДАЛЬНОЕ ОКНО ==========
     const cards = document.querySelectorAll('.card');
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
