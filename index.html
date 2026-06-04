@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Художник | Портфолио и продажа картин</title>
     <style>
+        /* ----- ПОДКЛЮЧЕНИЕ ШРИФТОВ ----- */
         @font-face {
             font-family: 'Yuliana';
             src: url('fonts/Yuliana.ttf') format('truetype');
@@ -19,52 +20,35 @@
             font-style: normal;
             font-display: swap;
         }
+
+        /* ----- ОСНОВНЫЕ СТИЛИ (СВЕТЛАЯ СМЯГЧЁННАЯ ВЕРСИЯ) ----- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        /* ФОНОВОЕ ИЗОБРАЖЕНИЕ НА ВСЮ СТРАНИЦУ */
         body {
-            background: #f4f4f4;
+            /* ЗАМЕНИТЕ ИМЯ ФАЙЛА, ЕСЛИ ВЫ ПЕРЕИМЕНОВАЛИ СОЛНЦЕ */
+            background: url('солнце%20—%20копия%202.jpg') center / cover fixed #f4f4f4;
+            /* cover — без зазоров на любом экране, fixed — фон не скроллится */
             color: #4a4a4a;
             font-family: 'EastSeaDoc', 'Spaghetti Cyrillic', 'Segoe UI', Roboto, sans-serif;
-            font-size: 1rem;
+            font-size: 1.1rem;
             line-height: 1.5;
         }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
         }
-        /* ШАПКА С ФОНОВЫМ ИЗОБРАЖЕНИЕМ */
         header {
             text-align: center;
-            border-bottom: 1px solid rgba(224,224,224,0.5);
+            border-bottom: 1px solid rgba(224,224,224,0.6);
             padding-bottom: 2rem;
             margin-bottom: 3rem;
-            position: relative;
-            background: rgba(255,255,255,0.85);
-            border-radius: 32px;
-            overflow: hidden;
-        }
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('солнце%20—%20копия%202.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.25;
-            z-index: 0;
-            pointer-events: none;
-        }
-        header > * {
-            position: relative;
-            z-index: 1;
         }
         h1 {
             font-family: 'Yuliana', 'Georgia', 'Times New Roman', serif;
@@ -85,68 +69,117 @@
             flex-wrap: wrap;
         }
         nav a {
-            color: #6a6a6a;
+            color: #2c2c2c;
             text-decoration: none;
-            font-size: 2rem;
-            transition: 0.2s;
+            font-size: 2.8rem;
+            transition: all 0.2s ease;
         }
         nav a:hover {
-            color: #1f1f1f;
+            color: #000000;
+            text-shadow: 0 0 2px rgba(0,0,0,0.2);
         }
         h2 {
-            color: #2c2c2c;
-            font-size: 2.5rem;
+            color: #1f1f1f;
+            font-size: 2.8rem;
             font-weight: 300;
             border-left: 3px solid #c0c0c0;
             padding-left: 1rem;
             margin-bottom: 2rem;
-            margin-top: 3rem;
-            clear: both;
         }
-        h2:first-of-type {
-            margin-top: 0;
-        }
-        .chaotic-gallery {
+        .gallery {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px 20px;
-            margin-bottom: 4rem;
-            position: relative;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
-        .chaotic-card {
-            position: relative;
+        .card {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+            transition: box-shadow 0.2s, transform 0.2s;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            flex-shrink: 0;
-            border-radius: 16px;
+            width: 100%;
+            align-items: flex-start;
+            backdrop-filter: blur(0px);
+        }
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        .card-img {
+            flex: 1;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
-            background: #fff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            transition: transform 0.2s ease;
         }
-        .chaotic-card:hover {
-            transform: scale(1.02) rotate(0deg) !important;
-            z-index: 20;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+        .card-img:hover {
+            transform: scale(1.01);
         }
-        .chaotic-card img {
+        .card-img img {
             width: 100%;
             height: auto;
+            object-fit: cover;
             display: block;
             pointer-events: none;
         }
-        .chaotic-card .title {
-            position: absolute;
-            bottom: 12px;
-            left: 16px;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 500;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-            background: transparent;
-            padding: 0;
-            border-radius: 0;
+        .card-info {
+            flex: 1;
+            padding: 0 0.5rem;
+            text-align: left;
+        }
+        .card-title {
+            color: #1f1f1f;
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .card-price {
+            color: #4a4a4a;
+            font-size: 2rem;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        .btn {
+            display: inline-block;
+            background: #e8e8e8;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            margin-top: 0.5rem;
+            color: #2c2c2c;
+        }
+        .btn:hover {
+            background: #d4d4d4;
+            color: #000000;
+        }
+        .btn-disabled {
+            background: #f0f0f0;
+            color: #999999;
+            cursor: default;
             pointer-events: none;
+        }
+        .about {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 20px;
+            border-left: 4px solid #c0c0c0;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            line-height: 1.4;
+            color: #4a4a4a;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
         .contacts {
             display: flex;
@@ -157,28 +190,33 @@
             padding-left: 1rem;
         }
         .contacts a {
-            color: #4a4a4a !important;
+            color: #2c2c2c !important;
             text-decoration: none;
             transition: 0.2s;
-            font-size: 1.6rem;
+            font-size: 2rem;
             padding: 0.5rem 0;
         }
         .contacts a:hover {
-            color: #1f1f1f !important;
+            color: #000000 !important;
         }
         footer {
             text-align: center;
             padding: 2rem 0;
-            font-size: 1.2rem;
-            color: #888;
-            border-top: 1px solid #e0e0e0;
+            font-size: 1.6rem;
+            color: #555555;
+            border-top: 1px solid rgba(224,224,224,0.6);
         }
+        footer p {
+            margin: 0.2rem 0;
+        }
+
+        /* Кнопка "Наверх" */
         .scroll-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
             background: #2c2c2c;
-            color: #fff;
+            color: #ffffff;
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -186,209 +224,319 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.2s;
+            transition: background 0.2s, transform 0.2s;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 100;
             font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
         }
         .scroll-top:hover {
             background: #1a1a1a;
             transform: translateY(-3px);
         }
+
+        /* Модальное окно */
         .modal {
             display: none;
             position: fixed;
-            z-index: 2000;
+            z-index: 1000;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background-color: rgba(0,0,0,0.85);
+            cursor: pointer;
             align-items: center;
             justify-content: center;
-            overflow-y: auto;
-            cursor: pointer;
         }
         .modal-content {
             max-width: 90%;
             max-height: 90%;
-            background: #fff;
-            border-radius: 24px;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-            cursor: default;
-            margin: 2rem auto;
-        }
-        .modal-img {
-            max-width: 100%;
-            max-height: 60vh;
             object-fit: contain;
-            border-radius: 16px;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
         }
-        .modal-description {
-            text-align: left;
-            width: 100%;
-            max-width: 600px;
-        }
-        .modal-description h3 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: #1f1f1f;
-        }
-        .modal-description p {
-            font-size: 1.2rem;
-            margin: 0.5rem 0;
-            color: #333;
-        }
-        .modal-btn {
-            display: inline-block;
-            background: #e8e8e8;
-            border: none;
-            padding: 0.6rem 1.5rem;
-            border-radius: 40px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 1rem;
-            color: #2c2c2c;
-        }
-        .modal-btn-disabled {
-            background: #f0f0f0;
-            color: #999;
-            cursor: default;
-        }
-        .close-modal {
+        .close-btn {
             position: absolute;
             top: 20px;
-            right: 30px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
             background: none;
             border: none;
-            font-size: 40px;
-            cursor: pointer;
-            color: #888;
+            font-family: monospace;
         }
-        .close-modal:hover {
-            color: #000;
+        .close-btn:hover {
+            color: #ccc;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 900px) {
+            .card {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .card-info {
+                padding: 0;
+            }
         }
         @media (max-width: 768px) {
-            .chaotic-card .title { font-size: 0.9rem; bottom: 6px; left: 8px; }
-            .contacts a { font-size: 1.3rem; }
+            .card-title { font-size: 2.4rem; }
+            .card-price { font-size: 1.6rem; }
+            .btn { font-size: 1.4rem; }
+            nav a { font-size: 2rem; }
+            .about { font-size: 1.6rem; }
+            .contacts a { font-size: 1.6rem; }
             h1 { font-size: 3rem; }
-            nav a { font-size: 1.5rem; }
-            .modal-description h3 { font-size: 1.5rem; }
-            .modal-description p { font-size: 1rem; }
-            .scroll-top { width: 40px; height: 40px; font-size: 22px; bottom: 20px; right: 20px; }
-            header::before { opacity: 0.2; }
+            .container { padding: 1rem; }
+            footer { font-size: 1.2rem; }
+            .scroll-top {
+                width: 40px;
+                height: 40px;
+                font-size: 22px;
+                bottom: 20px;
+                right: 20px;
+            }
         }
     </style>
 </head>
 <body>
+
 <div class="container">
     <header>
         <h1>SERGEY VASILIEV</h1>
         <nav>
-            <a href="#for-sale">В продаже</a>
-            <a href="#sold">Проданные</a>
+            <a href="#gallery">Галерея</a>
+            <a href="#about">Обо мне</a>
             <a href="#contacts">Контакты</a>
         </nav>
     </header>
+
     <main>
-        <section id="for-sale"><h2>В продаже</h2><div id="forSaleGallery" class="chaotic-gallery"></div></section>
-        <section id="sold"><h2>Проданные</h2><div id="soldGallery" class="chaotic-gallery"></div></section>
-        <section id="contacts"><h2>Контакты</h2><div class="contacts"><a href="mailto:Vasilev_SV@inbox.ru">Vasilev_SV@inbox.ru</a><a href="tel:+79216452060">8 (921) 645-20-60</a></div></section>
+        <section id="gallery">
+            <h2>Доступные работы</h2>
+            <div class="gallery">
+                <!-- ========== КАРТИНЫ В ПРОДАЖЕ ========== -->
+                <!-- 1. Летящий демон Врубеля -->
+                <div class="card" data-img="photo_2024-12-25_14-56-57.jpg">
+                    <div class="card-img">
+                        <img src="photo_2024-12-25_14-56-57.jpg" alt="Летящий демон Врубеля">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Летящий демон Врубеля</div>
+                        <div class="card-price">Холст 150 х 110 / масло</div>
+                        <div class="card-price">2024 год</div>
+                        <div class="card-price">Взгляд устремлён вперёд, но не видит цели. Вокруг — холодное, безжизненное пространство, которое написано кристаллическими, острыми мазками.</div>
+                        <a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину Летящий демон Врубеля" class="btn">Купить</a>
+                    </div>
+                </div>
+
+                <!-- 2. Самурай -->
+                <div class="card" data-img="IMG_20260528_202323.webp">
+                    <div class="card-img">
+                        <img src="IMG_20260528_202323.webp" alt="Самурай">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Самурай</div>
+                        <div class="card-price">Холст 150 х 110 / масло</div>
+                        <div class="card-price">2024 год</div>
+                        <div class="card-price">Перед вами — не просто воин. Это дух, пойманный в момент высшего напряжения, в точке перерождения. Главный герой здесь — не сталь клинка, а сама стихия.</div>
+                        <a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину Самурай" class="btn">Купить</a>
+                    </div>
+                </div>
+
+                <!-- 3. Однажды в Карелии -->
+                <div class="card" data-img="photo_2025-03-08_21-29-04.jpg">
+                    <div class="card-img">
+                        <img src="photo_2025-03-08_21-29-04.jpg" alt="Однажды в Карелии">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Однажды в Карелии</div>
+                        <div class="card-price">Холст 150 х 120 / масло</div>
+                        <div class="card-price">2025 год</div>
+                        <div class="card-price">Красота бывает молчаливой. Это приглашение остановиться. Заметить момент, когда природа не говорит, а дышит.</div>
+                        <a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину Однажды в Карелии" class="btn">Купить</a>
+                    </div>
+                </div>
+
+                <!-- 4. Нежность -->
+                <div class="card" data-img="IMG_20260528_185752.webp">
+                    <div class="card-img">
+                        <img src="IMG_20260528_185752.webp" alt="Нежность">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Нежность</div>
+                        <div class="card-price">Холст 40 х 30 / масло</div>
+                        <div class="card-price">2021 год</div>
+                        <div class="card-price">Нежность — это не слабость, а внутренняя целостность и достоинство, не нуждающееся в демонстрации.</div>
+                        <a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину Нежность" class="btn">Купить</a>
+                    </div>
+                </div>
+
+                <!-- 5. Макхамба -->
+                <div class="card" data-img="IMG_20260528_185753.webp">
+                    <div class="card-img">
+                        <img src="IMG_20260528_185753.webp" alt="Макхамба">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Макхамба</div>
+                        <div class="card-price">Холст 60 х 50 / масло</div>
+                        <div class="card-price">2021 год</div>
+                        <div class="card-price">Образ внутренней свободы, застывшей в моменте тишины.</div>
+                        <a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину Макхамба" class="btn">Купить</a>
+                    </div>
+                </div>
+
+                <!-- ========== ПРОДАННЫЕ КАРТИНЫ ========== -->
+                <!-- 6. Жан-Мишель -->
+                <div class="card" data-img="IMG_20260528_185740.webp">
+                    <div class="card-img">
+                        <img src="IMG_20260528_185740.webp" alt="Жан-Мишель">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Жан-Мишель</div>
+                        <div class="card-price">Холст 90 х 90 / масло</div>
+                        <div class="card-price">2023 год</div>
+                        <div class="card-price">Стилизованный портрет, вдохновленный эстетикой Баския. Корона — знак внутренней силы и бунтарства.</div>
+                        <a href="#" class="btn btn-disabled">Продано</a>
+                    </div>
+                </div>
+
+                <!-- 7. Взгляд -->
+                <div class="card" data-img="IMG_20260528_185755.webp">
+                    <div class="card-img">
+                        <img src="IMG_20260528_185755.webp" alt="Взгляд">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Взгляд</div>
+                        <div class="card-price">Холст 70 х 50 / масло / копия</div>
+                        <div class="card-price">2022 год</div>
+                        <div class="card-price">Геометрия и цвет сливаются в единый образ. Это портрет, где эмоции выражены не словами, а спектром оттенков.</div>
+                        <a href="#" class="btn btn-disabled">Продано</a>
+                    </div>
+                </div>
+
+                <!-- 8. Ты и я -->
+                <div class="card" data-img="IMG_20260528_185757.webp">
+                    <div class="card-img">
+                        <img src="IMG_20260528_185757.webp" alt="Ты и я">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Ты и я</div>
+                        <div class="card-price">Холст 80 х 60 / масло / копия</div>
+                        <div class="card-price">2022 год</div>
+                        <div class="card-price">Они стоят рядом, но каждый хранит свою тайну. Это история о том, что за привычным обликом всегда скрывается целый калейдоскоп эмоций.</div>
+                        <a href="#" class="btn btn-disabled">Продано</a>
+                    </div>
+                </div>
+
+                <!-- 9. Пляж -->
+                <div class="card" data-img="IMG_20260528_185759.webp">
+                    <div class="card-img">
+                        <img src="IMG_20260528_185759.webp" alt="Пляж">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Пляж</div>
+                        <div class="card-price">Холст 30 х 20 / масло</div>
+                        <div class="card-price">2020 год</div>
+                        <div class="card-price">Это мгновение, застывшее в красках. Шум прибоя и жар солнца, сплетенные в единую симфонию.</div>
+                        <a href="#" class="btn btn-disabled">Продано</a>
+                    </div>
+                </div>
+
+                <!-- 10. Единство -->
+                <div class="card" data-img="IMG_20260528_185801.webp">
+                    <div class="card-img">
+                        <img src="IMG_20260528_185801.webp" alt="Единство">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Единство</div>
+                        <div class="card-price">Холст 80 х 60 / масло</div>
+                        <div class="card-price">Холст 80 х 60 / масло / копия</div>
+                        <div class="card-price">2021 год</div>
+                        <div class="card-price">В каждом изгибе головного убора — отголосок древних песен, в каждом взгляде — мудрость веков.</div>
+                        <a href="#" class="btn btn-disabled">Продано</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2>О художнике</h2>
+            <div class="about">
+                <p>Каждая картина — это диалог с тишиной. Я работаю в смешанной технике, используя акрил или масло.<br><br>Хотите приобрести работу? Напишите мне — обсудим детали.</p>
+            </div>
+        </section>
+
+        <section id="contacts">
+            <h2>Контакты</h2>
+            <div class="contacts">
+                <a href="mailto:Vasilev_SV@inbox.ru">Vasilev_SV@inbox.ru</a>
+                <a href="tel:+79216452060">8 (921) 645-20-60</a>
+            </div>
+        </section>
     </main>
-    <footer><p>2025 · все права защищены</p></footer>
+
+    <footer>
+        <p>2025</p>
+        <p> · все права защищены · </p>
+    </footer>
 </div>
-<div class="scroll-top" id="scrollTopBtn">↑</div>
-<div id="modal" class="modal"><div class="modal-content"><button class="close-modal">&times;</button><img class="modal-img" id="modalImg" alt=""><div class="modal-description" id="modalDesc"></div></div></div>
+
+<div class="scroll-top" id="scrollTopBtn" aria-label="Наверх">↑</div>
+
+<div id="imageModal" class="modal">
+    <span class="close-btn">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
 
 <script>
-    const paintings = [
-        { name: "Летящий демон Врубеля", img: "photo_2024-12-25_14-56-57.jpg", year: "2024", size: "Холст 150 х 110 / масло", desc: "Взгляд устремлён вперёд, но не видит цели. Вокруг — холодное, безжизненное пространство, которое написано кристаллическими, острыми мазками.", sold: false },
-        { name: "Самурай", img: "IMG_20260528_202323.webp", year: "2024", size: "Холст 150 х 110 / масло", desc: "Перед вами — не просто воин. Это дух, пойманный в момент высшего напряжения, в точке перерождения. Главный герой здесь — не сталь клинка, а сама стихия.", sold: false },
-        { name: "Однажды в Карелии", img: "photo_2025-03-08_21-29-04.jpg", year: "2025", size: "Холст 150 х 120 / масло", desc: "Красота бывает молчаливой. Это приглашение остановиться. Заметить момент, когда природа не говорит, а дышит.", sold: false },
-        { name: "Нежность", img: "IMG_20260528_185752.webp", year: "2021", size: "Холст 40 х 30 / масло", desc: "Нежность — это не слабость, а внутренняя целостность и достоинство, не нуждающееся в демонстрации.", sold: false },
-        { name: "Макхамба", img: "IMG_20260528_185753.webp", year: "2021", size: "Холст 60 х 50 / масло", desc: "Образ внутренней свободы, застывшей в моменте тишины.", sold: false },
-        { name: "Жан-Мишель", img: "IMG_20260528_185740.webp", year: "2023", size: "Холст 90 х 90 / масло", desc: "Стилизованный портрет, вдохновленный эстетикой Баския. Корона — знак внутренней силы и бунтарства.", sold: true },
-        { name: "Взгляд", img: "IMG_20260528_185755.webp", year: "2022", size: "Холст 70 х 50 / масло / копия", desc: "Геометрия и цвет сливаются в единый образ. Это портрет, где эмоции выражены не словами, а спектром оттенков.", sold: true },
-        { name: "Ты и я", img: "IMG_20260528_185757.webp", year: "2022", size: "Холст 80 х 60 / масло / копия", desc: "Они стоят рядом, но каждый хранит свою тайну. Это история о том, что за привычным обликом всегда скрывается целый калейдоскоп эмоций.", sold: true },
-        { name: "Пляж", img: "IMG_20260528_185759.webp", year: "2020", size: "Холст 30 х 20 / масло", desc: "Это мгновение, застывшее в красках. Шум прибоя и жар солнца, сплетенные в единую симфонию.", sold: true },
-        { name: "Единство", img: "IMG_20260528_185801.webp", year: "2021", size: "Холст 80 х 60 / масло", desc: "В каждом изгибе головного убора — отголосок древних песен, в каждом взгляде — мудрость веков.", sold: true }
-    ];
-    const forSale = paintings.filter(p => !p.sold);
-    const sold = paintings.filter(p => p.sold);
-    function getRandomStyle() {
-        const width = 200 + Math.floor(Math.random() * 180);
-        const rotate = (Math.random() - 0.5) * 12;
-        return {
-            width: width + 'px',
-            transform: `rotate(${rotate}deg)`,
-            marginTop: (Math.random() * 30 - 15) + 'px',
-            marginRight: (Math.random() * 20) + 'px',
-            zIndex: Math.floor(Math.random() * 10) + 1
-        };
-    }
-    function createCard(p) {
-        const card = document.createElement('div');
-        card.className = 'chaotic-card';
-        const img = document.createElement('img');
-        img.src = p.img;
-        img.alt = p.name;
-        img.loading = 'lazy';
-        const title = document.createElement('div');
-        title.className = 'title';
-        title.textContent = p.name;
-        card.appendChild(img);
-        card.appendChild(title);
-        const style = getRandomStyle();
-        card.style.width = style.width;
-        card.style.transform = style.transform;
-        card.style.marginTop = style.marginTop;
-        card.style.marginRight = style.marginRight;
-        card.style.zIndex = style.zIndex;
-        card.addEventListener('click', (e) => {
-            e.stopPropagation();
-            openModal(p);
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    if (scrollBtn) {
+        scrollBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-        return card;
     }
-    function openModal(p) {
-        const modal = document.getElementById('modal');
-        const modalImg = document.getElementById('modalImg');
-        const modalDesc = document.getElementById('modalDesc');
-        modalImg.src = p.img;
-        modalImg.alt = p.name;
-        const buttonHtml = p.sold
-            ? '<span class="modal-btn modal-btn-disabled">Продано</span>'
-            : `<a href="mailto:Vasilev_SV@inbox.ru?subject=Куплю картину ${p.name}" class="modal-btn">Купить</a>`;
-        modalDesc.innerHTML = `
-            <h3>${p.name}</h3>
-            <p><strong>${p.size}</strong></p>
-            <p>${p.year}</p>
-            <p>${p.desc}</p>
-            ${buttonHtml}
-        `;
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
+
+    const cards = document.querySelectorAll('.card');
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeBtn = document.querySelector('.close-btn');
+
+    cards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            if (e.target.classList && e.target.classList.contains('btn')) return;
+            if (e.target.tagName === 'A') return;
+            let imgSrc = card.getAttribute('data-img');
+            if (!imgSrc) {
+                const imgElement = card.querySelector('.card-img img');
+                if (imgElement) imgSrc = imgElement.src;
+            }
+            if (imgSrc) {
+                modal.style.display = 'flex';
+                modalImg.src = imgSrc;
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
     function closeModal() {
-        document.getElementById('modal').style.display = 'none';
+        modal.style.display = 'none';
+        modalImg.src = '';
         document.body.style.overflow = '';
     }
-    const forSaleContainer = document.getElementById('forSaleGallery');
-    const soldContainer = document.getElementById('soldGallery');
-    forSale.forEach(p => forSaleContainer.appendChild(createCard(p)));
-    sold.forEach(p => soldContainer.appendChild(createCard(p)));
-    document.getElementById('scrollTopBtn').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    const modal = document.getElementById('modal');
-    const closeModalBtn = document.querySelector('.close-modal');
-    closeModalBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'flex') closeModal(); });
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+    });
 </script>
 </body>
 </html>
