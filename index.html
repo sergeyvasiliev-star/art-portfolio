@@ -102,21 +102,21 @@
             display: flex;
             flex-direction: row;
             gap: 2rem;
-            background: #fef7e6;
+            background: #0F172A;   /* новый тёмный фон */
             border-radius: 24px;
             padding: 1.5rem;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
             transition: box-shadow 0.2s, transform 0.2s;
             cursor: pointer;
             width: 100%;
             align-items: flex-start;
         }
         .card:hover {
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
         }
         .card-img {
             flex: 1;
-            background: #fafafa;
+            background: #1e1e1e;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -138,15 +138,16 @@
             flex: 1;
             padding: 0 0.5rem;
             text-align: left;
+            color: #e0e0e0;   /* светлый текст для контраста */
         }
         .card-title {
-            color: #2c2c2c;
+            color: #ffffff;
             font-size: 3rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
         .card-price {
-            color: #4a4a4a;
+            color: #cccccc;
             font-size: 2rem;
             font-weight: normal;
             margin-bottom: 0.5rem;
@@ -176,14 +177,14 @@
             pointer-events: none;
         }
         .about {
-            background: #fef7e6;
+            background: #0F172A;   /* новый тёмный фон */
             padding: 1.5rem;
             border-radius: 20px;
             border-left: 4px solid #c0a070;
             margin-bottom: 3rem;
             font-size: 2rem;
             line-height: 1.4;
-            color: #3a3a3a;
+            color: #e0e0e0;       /* светлый текст */
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
         .contacts {
@@ -489,6 +490,7 @@
 
     <footer>
         <p>2025</p>
+        <p> · все права защищены · </p>
         <p> · all rights reserved · </p>
     </footer>
 </div>
